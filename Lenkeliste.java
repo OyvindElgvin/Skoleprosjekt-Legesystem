@@ -19,6 +19,28 @@ class Lenkeliste <T> implements Liste <T> {
 		Node neste = null;
 	}
 
+	class LenkelisteIterator implements Iterator<T>{
+		private Liste<T> = enListe;
+		private int pos;
+
+		public LenkelisteIterator(Lenkeliste<T> liste){
+			enListe = liste;
+			pos = 0;
+		}
+		public next(){
+			return enListe.get(pos++);
+		}
+		public hasNext(){
+			return(pos < enListe.size());
+		}
+
+
+	}
+
+	public Iterator<T> itarator(){
+		return new LenkelisteIterator();
+	}
+
 	// legger til ved posisjon pos
 	public void leggTil(int pos, T x) {
 		if (stoerrelse() == 0) { 	// hvis lista er tom og posisjonen er 0, legg til
