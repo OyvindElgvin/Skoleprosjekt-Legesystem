@@ -3,8 +3,8 @@ class MillaResept extends HvitResept {
 	// Kort for militærResept.
 	// Resept med egen ID uten avnslag.
 
-	public MillaResept(Legemiddel legemiddel, Lege utskrivendeLege, int pasientId, int reit) {
-		super(legemiddel, utskrivendeLege, pasientId, reit);
+	public MillaResept(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient, int reit) {
+		super(legemiddel, utskrivendeLege, pasient, reit);
 	}
 
 	// Henter prisen på legemiddelet uten noen avslag

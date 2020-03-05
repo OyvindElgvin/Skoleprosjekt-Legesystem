@@ -5,6 +5,10 @@ class Hovedprogram {
 		Lege lege = new Lege("Doktor Jørgen Skavlan");
 		Spesialist spesialist = new Spesialist("Spesialist Tanja Kalchenko", 1234);
 
+		//Pasient
+		Pasient pasient0 = new Pasient("Georg", "241356");
+		Pasient pasient1 = new Pasient("Georg", "241356");
+
 		// Oppretter legemidler
 		Narkotisk narkotisk = new Narkotisk("Metadon", 1000, 90, 20);
 		Vanedannende vanedannende = new Vanedannende("Cosylan", 500, 0.01, 9);
@@ -12,10 +16,10 @@ class Hovedprogram {
 		VanligLegemiddel vanligLegemiddel = new VanligLegemiddel("P-piller", 120, 0.002);
 
 		// Oppretter resepter
-		HvitResept hvitResept = new HvitResept(vanedannende, lege, 123, 12);
-		MillaResept millaResept = new MillaResept(vanedannende2, lege, 234, 23);
-		PResept pResept = new PResept(vanligLegemiddel, spesialist, 345);
-		BlaaResept blaaResept = new BlaaResept(narkotisk, spesialist, 456, 34);
+		HvitResept hvitResept = new HvitResept(vanedannende, lege, pasient0, 12);
+		MillaResept millaResept = new MillaResept(vanedannende2, lege, pasient1, 23);
+		PResept pResept = new PResept(vanligLegemiddel, spesialist, pasient0);
+		BlaaResept blaaResept = new BlaaResept(narkotisk, spesialist, pasient1, 34);
 
 		// tester toString-metoden
 		testToString(lege, spesialist, narkotisk, vanedannende, vanedannende2,

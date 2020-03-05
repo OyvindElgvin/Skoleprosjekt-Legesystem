@@ -2,8 +2,8 @@ class PResept extends HvitResept {
 
 	// Resept med et avslag på 108 kr og egen ID.
 
-	public PResept(Legemiddel legemiddel, Lege utskrivendeLege, int pasientId) {
-		super(legemiddel, utskrivendeLege, pasientId, 3);
+	public PResept(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient) {
+		super(legemiddel, utskrivendeLege, pasient, 3);
 	}
 
 	// Setter ny pris etter avslaget, og gratis hvis avslaget > prisen

@@ -1,19 +1,19 @@
 abstract class Resept {
 
-	// Abstrakt klasse som tar inn legemiddel, utskrivendeLege, pasientId,
+	// Abstrakt klasse som tar inn legemiddel, utskrivendeLege, pasient,
 	// og en reit, som forteller hvor mange ganger en resept kan brukes.
 
 	Legemiddel legemiddelet;
 	Lege utskrivendeLege;
-	protected int pasientId;
+	protected Pasient pasient;
 	protected int reit;
 	protected static int IDTeller = -1;
 	protected int ID;
 
-	public Resept(Legemiddel legemiddel, Lege utskrivendeLege0, int pasientId0, int reit0) {
+	public Resept(Legemiddel legemiddel, Lege utskrivendeLege0, Pasient pasient0, int reit0) {
 		legemiddelet = legemiddel;
 		utskrivendeLege = utskrivendeLege0;
-		pasientId = pasientId0;
+		pasient = pasient0;
 		reit = reit0;
 		IDTeller ++;
 		ID = IDTeller;
@@ -40,7 +40,7 @@ abstract class Resept {
 
 	// Henter PasientID'n fra pasienten
 	public int hentPasientId() {
-		return pasientId;
+		return pasient.hentId();
 	}
 
 	// Henter ut hvor mange reit det er igjen

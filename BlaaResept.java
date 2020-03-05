@@ -4,8 +4,8 @@ class BlaaResept extends Resept {
 
 	protected double blaaPris;
 
-	public BlaaResept(Legemiddel legemiddel, Lege utskrivendeLege, int pasientId, int reit) {
-		super(legemiddel, utskrivendeLege, pasientId, reit);
+	public BlaaResept(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient, int reit) {
+		super(legemiddel, utskrivendeLege, pasient, reit);
 		blaaPris = legemiddelet.hentPris()*0.25;
 	}
 
