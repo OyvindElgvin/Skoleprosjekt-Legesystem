@@ -8,7 +8,7 @@ abstract class Legemiddel {
 	protected static int IDTeller = -1;
 	protected int ID;
 
-// Dette er en kommentar.
+
 	public Legemiddel(String navnet, double prisen, double virkestoffet) {
 		navn = navnet;
 		pris = prisen;
