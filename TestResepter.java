@@ -10,10 +10,14 @@ class TestResepter {
 		Lege legen = new Lege("Bjørn");
 		Spesialist spesialist = new Spesialist("Spesialist Werner", 128932);
 
+		// pasient
+		Pasient pasient0 = new Pasient("Georg", "241356");
+		Pasient pasient1 = new Pasient("Georg", "241356");
+
 		// resepter
-		MillaResept millaResept = new MillaResept(metadon, legen, 312, 10);
-		PResept pResept = new PResept(pPille, legen, 423);
-		BlaaResept blaaResept = new BlaaResept(metadon, spesialist, 45, 7);
+		MillaResept millaResept = new MillaResept(metadon, legen, pasient0, 10);
+		PResept pResept = new PResept(pPille, legen, pasient1);
+		BlaaResept blaaResept = new BlaaResept(metadon, spesialist, pasient0, 7);
 
 		// testmetoder for metodene i de forskjellige instansene
 		System.out.println();

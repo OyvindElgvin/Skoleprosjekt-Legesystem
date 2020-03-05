@@ -2,8 +2,8 @@ class HvitResept extends Resept {
 
 	// Resept med egen ID uten avslag.
 
-	public HvitResept(Legemiddel legemiddel, Lege utskrivendeLege, int pasientId, int reit) {
-		super(legemiddel, utskrivendeLege, pasientId, reit);
+	public HvitResept(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient, int reit) {
+		super(legemiddel, utskrivendeLege, pasient, reit);
 	}
 
 	// Henter ut fargen på resepten
