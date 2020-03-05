@@ -12,7 +12,7 @@ class TestResepter {
 
 		// pasient
 		Pasient pasient0 = new Pasient("Georg", "241356");
-		Pasient pasient1 = new Pasient("Georg", "241356");
+		Pasient pasient1 = new Pasient("Georg", "241856");
 
 		// resepter
 		MillaResept millaResept = new MillaResept(metadon, legen, pasient0, 10);
