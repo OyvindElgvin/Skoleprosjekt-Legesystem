@@ -10,7 +10,7 @@ abstract class Resept {
 	protected static int IDTeller = -1;
 	protected int ID;
 
-	//noe
+	//noenoe
 	public Resept(Legemiddel legemiddel, Lege utskrivendeLege0, int pasientId0, int reit0) {
 		legemiddelet = legemiddel;
 		utskrivendeLege = utskrivendeLege0;
