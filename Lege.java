@@ -2,7 +2,7 @@ class Lege implements Comparable<Lege> {
 
 	// Lege tar inn navn som argument
 	protected String navn;
-	private Lenkeliste<Resept>
+	private Lenkeliste<Resept> legensReseptListe = new Lenkeliste<>();
 
 	public Lege(String navnet) {
 		navn = navnet;
