@@ -29,9 +29,6 @@ class Lenkeliste <T> implements Liste <T> {
 			pos = 0;
 		}
 
-		public T next(){
-			return enListe.hent(pos++); //Denne maa forandres, get-metoden fungerer bare for arraylister, vi har lenkeliste.
-		}
 		public boolean hasNext(){
 
 
