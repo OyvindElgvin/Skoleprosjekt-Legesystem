@@ -3,8 +3,7 @@ class Lege extends UlovligUtskrift implements Comparable<Lege> {
 	// Lege tar inn navn som argument
 	protected String navn;
 	protected Lenkeliste<Resept> legensReseptListe = new Lenkeliste<>();
-	protected Lege[] legen;
-	protected ikkeSpesialist;
+	protected int ikkeSpesialist;
 
 	public Lege(String navnet, int ikkeSpesialist) {
 		navn = navnet;
