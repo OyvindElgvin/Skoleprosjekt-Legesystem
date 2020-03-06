@@ -21,13 +21,6 @@ class Lege extends UlovligUtskrift implements Comparable<Lege> {
 		return "Lege: "+hentNavn();
 	}
 
-	/*
-	public int sorterLege(String navnet){
-		if (navnet.compareTo(this.navn) > 0) return -1;
-		if (navnet.compareTo(this.navn) < 0) return 1;
-		return 0;
-	}
-	*/
 
 	// Henter ut reseptlista til legen
 	public Lenkeliste<Resept> utskrevdeResepter() {
@@ -36,7 +29,7 @@ class Lege extends UlovligUtskrift implements Comparable<Lege> {
 
 	public HvitResept skrivHvitResept(Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift {
 		if (ikkeSpesialist != 0) {
-			throw new UlovligUtskrift(this, legemiddel);
+			//throw new UlovligUtskrift(this, legemiddel);
 		}
 		HvitResept hvitResept = new HvitResept(legemiddel, this, pasient, reit);
 		legensReseptListe.leggTil(hvitResept);

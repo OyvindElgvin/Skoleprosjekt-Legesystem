@@ -53,7 +53,7 @@ class Legesystem{
                     leger.leggTil(lege);
 
                 } else if(objekttype == 4){ //Resepter
-                    Legemiddel legemiddel = legemidler.hent(data[0]);
+                    Legemiddel legemiddel = legemidler.hent(Integer.parseInt(data[0]));
                     String legeNavn = data[1];
                     Lege ritkigLege;
                     for(Lege enLege : leger){
@@ -61,10 +61,10 @@ class Legesystem{
                             ritkigLege = enLege;
                         }
                     }
-                    Pasient pasient = pasienter.hent(data[2]);
+                    Pasient pasient = pasienter.hent(Integer.parseInt(data[2]));
                     int reit;
                     if(data.length == 4){
-                        reit = data[3];
+                        reit = Integer.parseInt(data[3]);
                     }
 
                     //Lager resept-objekt
