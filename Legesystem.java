@@ -16,7 +16,7 @@ class Legesystem{
         Scanner scanner = new Scanner(fil);
 
         int objekttype = 0; //Sier hvilke type objekt som leses
-        
+
 
         while(scanner.hasNextLine()){
             if(scanner.nextLine().startsWith("#")){//Ny type objekt
@@ -32,43 +32,39 @@ class Legesystem{
                 } else if(objekttype == 2){ //Legemidler
                     String navn = data[0];
                     String type = data[1];
-                    float pris = Float.parseFloat(data[2]);
-                    float virkestoff = Float.parseFloat(data[3]);
-                    Legemiddel legemiddel;
+                    float pris = parseFloat(data[2]);
+                    float virkestoff = parseFloat(data[3]);
 
                     if(type == "a"){ //Narkotisk
-                        int styrke = Integer.parseInt(data[4]);
-                        legemiddel = new Narkotisk(navn, pris, virkestoff, styrke);
+                        int styrke = parseInt(data[4]);
+                        Narkotisk legemiddel = new Narkotisk(navn, pris, virkestoff, styrke);
 
                     } else if(type == "b"){ //Vanedannende
-                        int styrke = Integer.parseInt(data[4]);
-                        legemiddel= new Vanedannende(navn, pris, virkestoff, styrke);
-                        
+                        int styrke = parseInt(data[4]);
+                        Vanedannende legemiddel= new Vanedannende(navn, pris, virkestoff, styrke);
+
                     } else if(type == "c"){ //Vanlig
-                        legemiddel = new VanligLegemiddel(navn, pris, virkestoff);
+                        VanligLegemiddel legemiddel = new VanligLegemiddel(navn, pris, virkestoff);
                     }
                 legemidler.leggTil(legemiddel);
 
                 } else if(objekttype == 3){ //Leger
-                    Lege lege = new Lege(data[0], Integer.parseInt(data[1]));
+                    Lege lege = new Lege(data[0], parseInt(data[1]));
                     leger.leggTil(lege);
 
                 } else if(objekttype == 4){ //Resepter
-                    Legemiddel legemiddel = legemidler.hent(Integer.parseInt(data[0]));
-
-                    String legenavn = data[1];
+                    Legemiddel legemiddel = legemidler.hent(data[0]);
+                    String legeNavn = data[1];
                     Lege ritkigLege;
                     for(Lege enLege : leger){
                         if(legenavn == enLege.hentNavn()){
                             ritkigLege = enLege;
                         }
                     }
-
-                    Pasient pasient = pasienter.hent(Integer.parseInt(data[2]));
-
+                    Pasient pasient = pasienter.hent(data[2]);
                     int reit;
                     if(data.length == 4){
-                        reit = Integer.parseInt(data[3]);
+                        reit = data[3];
                     }
 
                     //Lager resept-objekt
