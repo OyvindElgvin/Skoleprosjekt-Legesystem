@@ -29,9 +29,6 @@ class Lenkeliste <T> implements Liste <T> {
 			pos = 0;
 		}
 
-		public boolean hasNext(){
-
-
 		public T next(){				// returnerer neste element i lista
 			return enListe.hent(pos++);
 		}
