@@ -3,43 +3,72 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 class Legesystem{
+    //Liste som holder på ulike objekter
     Liste<Pasient> pasienter = new Lenkeliste<Pasient>();
     Liste<Legemiddel> legemidler = new Lenkeliste<Legemiddel>();
     Liste<Lege> leger = new SortertLenkeliste<Lege>();
     Liste<Resept> resepter = new Lenkeliste<Resept>();
 
-
+    //Metode som leser fra fil og setter objekter inn i listene
+    //MANGLER UNNTAK...
     public void LesFil(String filnavn) throws FileNotFoundException{
         File fil = new File(filnavn);
         Scanner scanner = new Scanner(fil);
 
-        int objekttype = 0;
+        int objekttype = 0; //Sier hvilke type objekt som leses
         
 
         while(scanner.hasNextLine()){
-            if(scanner.nextLine().startsWith("#")){
+            if(scanner.nextLine().startsWith("#")){//Ny type objekt
                 objekttype++;
+
             } else {
                 String[] data = scanner.nextLine().split(",");
-                if(objekttype == 0){ //Pasient
+
+                if(objekttype == 1){ //Pasient
                     Pasient pasient = new Pasient(data[0], data[1]);
                     pasienter.leggTil(pasient);
-                } else if(objekttype == 1){ //Legemidler
-                    if(data[1] == "a"){ //Narkotisk
-                        Narkotisk legemiddel = new Narkotisk(data[0], data[2], data[3], data[4]);
 
-                    } else if(data[1] == "b"){ //Vanedannende
-                        Vanedannende legemiddel= new Vanedannende(data[0], data[2], data[3], data[4]);
+                } else if(objekttype == 2){ //Legemidler
+                    String navn = data[0];
+                    String type = data[1];
+                    float pris = parseFloat(data[2]);
+                    float virkestoff = parseFloat(data[3]);
+
+                    if(type == "a"){ //Narkotisk
+                        int styrke = parseInt(data[4]);
+                        Narkotisk legemiddel = new Narkotisk(navn, pris, virkestoff, styrke);
+
+                    } else if(type == "b"){ //Vanedannende
+                        int styrke = parseInt(data[4]);
+                        Vanedannende legemiddel= new Vanedannende(navn, pris, virkestoff, styrke);
                         
-                    } else if(data[1] == "c"){ //Vanlig
-                        VanligLegemiddel legemiddel = new VanligLegemiddel(data[0], data[2], data[3]);
+                    } else if(type == "c"){ //Vanlig
+                        VanligLegemiddel legemiddel = new VanligLegemiddel(navn, pris, virkestoff);
                     }
                 legemidler.leggTil(legemiddel);
-                } else if(objekttype == 2){ //Leger
-                    Lege lege = new Lege(data[0], data[1]);
+
+                } else if(objekttype == 3){ //Leger
+                    Lege lege = new Lege(data[0], parseInt(data[1]));
                     leger.leggTil(lege);
-                } else if(objekttype == 3){ //Resepter
-                    ...
+
+                } else if(objekttype == 4){ //Resepter
+                    Legemiddel legemiddel = legemidler.hent(data[0]);
+                    String legeNavn = data[1];
+                    Lege ritkigLege;
+                    for(Lege enLege : leger){
+                        if(legenavn == enLege.hentNavn()){
+                            ritkigLege = enLege;
+                        }
+                    }
+                    Pasient pasient = pasienter.hent(data[2]);
+                    int reit;
+                    if(data.length == 4){
+                        reit = data[3];
+                    }
+
+                    //Lager resept-objekt
+                    //Legger objektet i listen resepter
                 }
             }
         }
