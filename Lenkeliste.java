@@ -19,9 +19,13 @@ class Lenkeliste <T> implements Liste <T> {
 		Node neste = null;
 	}
 
+	public Iterator<T> itarator(){
+		return new LenkelisteIterator<T>(this);
+	}
+
 	// oppretter en LenkelisteIterator med hasNext() og next()
 	class LenkelisteIterator implements Iterator<T>{
-		private Liste<T> = enListe;
+		private Lenkeliste<T> enListe;
 		private int pos;
 
 		public LenkelisteIterator(Lenkeliste<T> liste){
@@ -36,10 +40,6 @@ class Lenkeliste <T> implements Liste <T> {
 		public boolean hasNext(){ 		// sjekker om det er et neste element
 			return(pos < enListe.stoerrelse());
 		}
-	}
-
-	public Iterator<T> itarator(){
-		return new LenkelisteIterator();
 	}
 
 	// legger til ved posisjon pos
