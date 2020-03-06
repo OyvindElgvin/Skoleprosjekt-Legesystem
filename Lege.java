@@ -18,4 +18,8 @@ class Lege implements Comparable<Lege> {
 	public String toString() {
 		return "Lege: "+hentNavn();
 	}
+
+	public Lenkeliste<Resept> utskrevdeResepter() {
+		return legensReseptListe;
+	}
 }
