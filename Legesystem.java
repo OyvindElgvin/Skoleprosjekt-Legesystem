@@ -32,15 +32,15 @@ class Legesystem{
                 } else if(objekttype == 2){ //Legemidler
                     String navn = data[0];
                     String type = data[1];
-                    float pris = parseFloat(data[2]);
-                    float virkestoff = parseFloat(data[3]);
+                    float pris = Float.parseFloat(data[2]);
+                    float virkestoff = Float.parseFloat(data[3]);
 
                     if(type == "a"){ //Narkotisk
-                        int styrke = parseInt(data[4]);
+                        int styrke = Integer.parseInt(data[4]);
                         Narkotisk legemiddel = new Narkotisk(navn, pris, virkestoff, styrke);
 
                     } else if(type == "b"){ //Vanedannende
-                        int styrke = parseInt(data[4]);
+                        int styrke = Integer.parseInt(data[4]);
                         Vanedannende legemiddel= new Vanedannende(navn, pris, virkestoff, styrke);
 
                     } else if(type == "c"){ //Vanlig
@@ -49,7 +49,7 @@ class Legesystem{
                 legemidler.leggTil(legemiddel);
 
                 } else if(objekttype == 3){ //Leger
-                    Lege lege = new Lege(data[0], parseInt(data[1]));
+                    Lege lege = new Lege(data[0], Integer.parseInt(data[1]));
                     leger.leggTil(lege);
 
                 } else if(objekttype == 4){ //Resepter
