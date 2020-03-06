@@ -2,6 +2,7 @@ class Lege implements Comparable<Lege> {
 
 	// Lege tar inn navn som argument
 	protected String navn;
+	private Lenkeliste<Resept>
 
 	public Lege(String navnet) {
 		navn = navnet;
