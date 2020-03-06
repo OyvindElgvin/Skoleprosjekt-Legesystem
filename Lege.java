@@ -19,7 +19,14 @@ class Lege implements Comparable<Lege> {
 		return "Lege: "+hentNavn();
 	}
 
+	// Henter ut reseptlista til legen
 	public Lenkeliste<Resept> utskrevdeResepter() {
 		return legensReseptListe;
+	}
+
+
+	public HvitResept skrivHvitResept(Legemiddel legemiddel, Pasient pasient, ​int​ reit) throws UlovligUtskrift​ {
+		HvitResept hvitResept = new HvitResept(legemiddel, this.lege, pasient, reit);
+		legensReseptListe.leggTil(hvitResept);
 	}
 }
