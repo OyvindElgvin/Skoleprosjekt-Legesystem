@@ -1,10 +1,10 @@
-class Lege implements Comparable<Lege> {
+class Lege extends UlovligUtskrift implements Comparable<Lege> {
 
 	// Lege tar inn navn som argument
 	protected String navn;
 	private Lenkeliste<Resept> legensReseptListe = new Lenkeliste<>();
 
-	public Lege(String navnet) {
+	public Lege(String navnet, int ikkeSpesialist) {
 		navn = navnet;
 	}
 
@@ -24,9 +24,11 @@ class Lege implements Comparable<Lege> {
 		return legensReseptListe;
 	}
 
-
-	public HvitResept skrivHvitResept(Legemiddel legemiddel, Pasient pasient, ​int​ reit) throws UlovligUtskrift​ {
-		HvitResept hvitResept = new HvitResept(legemiddel, this.lege, pasient, reit);
+	public HvitResept skrivHvitResept(Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift {
+		if (ikkeSpesialist != 0) {
+			throw new UlovligUtskrift(this, legemiddel);
+		}
+		HvitResept hvitResept = new HvitResept(legemiddel, this, pasient, reit);
 		legensReseptListe.leggTil(hvitResept);
 	}
 }
