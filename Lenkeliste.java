@@ -34,7 +34,7 @@ class Lenkeliste <T> implements Liste <T> {
 		}
 
 		public boolean hasNext(){ 		// sjekker om det er et neste element
-			return(pos < enListe.size());
+			return(pos < enListe.stoerrelse());
 		}
 	}
 
