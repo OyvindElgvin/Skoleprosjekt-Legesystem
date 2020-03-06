@@ -36,7 +36,7 @@ class Lenkeliste <T> implements Liste <T> {
 
 
 		public T next(){				// returnerer neste element i lista
-			return enListe.get(pos++);
+			return enListe.hent(pos++);
 		}
 
 		public boolean hasNext(){ 		// sjekker om det er et neste element
