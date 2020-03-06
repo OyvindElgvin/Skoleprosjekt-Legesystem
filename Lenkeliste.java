@@ -19,6 +19,7 @@ class Lenkeliste <T> implements Liste <T> {
 		Node neste = null;
 	}
 
+	// oppretter en LenkelisteIterator med hasNext() og next()
 	class LenkelisteIterator implements Iterator<T>{
 		private Liste<T> = enListe;
 		private int pos;
@@ -27,10 +28,18 @@ class Lenkeliste <T> implements Liste <T> {
 			enListe = liste;
 			pos = 0;
 		}
+
 		public T next(){
 			return enListe.get(pos++); //Denne maa forandres, get-metoden fungerer bare for arraylister, vi har lenkeliste.
 		}
 		public boolean hasNext(){
+
+
+		public T next(){				// returnerer neste element i lista
+			return enListe.get(pos++);
+		}
+
+		public boolean hasNext(){ 		// sjekker om det er et neste element
 			return(pos < enListe.size());
 		}
 	}
@@ -48,12 +57,12 @@ class Lenkeliste <T> implements Liste <T> {
 			start = new Node(x);
 		} else if (pos < 0 || pos > stoerrelse()){ 	// hvis prøver å legge til utenfor endepunktene
 			throw new UgyldigListeIndeks(pos);
-		} else if (pos == 0) { 			// hvis lista ikke er tom, legg til foran
+		} else if (pos == 0) { 		// hvis lista ikke er tom, legg til foran
 			Node nyNode = new Node(x);
 			Node p = start;
 			nyNode.neste = p;
 			start = nyNode;
-		} else { 						// legg til vilkårlig sted i lista
+		} else { 					// legg til vilkårlig sted i lista
 			Node p = start;
 			for (int i = 0; i < pos-1; i++) { // posisjon foran pos
 				p = p.neste;
