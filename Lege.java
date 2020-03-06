@@ -2,10 +2,13 @@ class Lege extends UlovligUtskrift implements Comparable<Lege> {
 
 	// Lege tar inn navn som argument
 	protected String navn;
-	private Lenkeliste<Resept> legensReseptListe = new Lenkeliste<>();
+	protected Lenkeliste<Resept> legensReseptListe = new Lenkeliste<>();
+	protected Lege[] legen;
+	protected ikkeSpesialist;
 
 	public Lege(String navnet, int ikkeSpesialist) {
 		navn = navnet;
+		this.ikkeSpesialist = ikkeSpesialist;
 	}
 
 	// Henter ut navn
@@ -18,6 +21,14 @@ class Lege extends UlovligUtskrift implements Comparable<Lege> {
 	public String toString() {
 		return "Lege: "+hentNavn();
 	}
+
+	/*
+	public int sorterLege(String navnet){
+		if (navnet.compareTo(this.navn) > 0) return -1;
+		if (navnet.compareTo(this.navn) < 0) return 1;
+		return 0;
+	}
+	*/
 
 	// Henter ut reseptlista til legen
 	public Lenkeliste<Resept> utskrevdeResepter() {
