@@ -27,14 +27,12 @@ class Lenkeliste <T> implements Liste <T> {
 			enListe = liste;
 			pos = 0;
 		}
-		public next(){
-			return enListe.get(pos++);
+		public T next(){
+			return enListe.get(pos++); //Denne maa forandres, get-metoden fungerer bare for arraylister, vi har lenkeliste.
 		}
-		public hasNext(){
+		public boolean hasNext(){
 			return(pos < enListe.size());
 		}
-
-
 	}
 
 	public Iterator<T> itarator(){
