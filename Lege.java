@@ -1,4 +1,4 @@
-class Lege {
+class Lege implements Comparable<Lege> {
 
 	// Lege tar inn navn som argument
 	protected String navn;
