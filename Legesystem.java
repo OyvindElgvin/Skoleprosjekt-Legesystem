@@ -70,10 +70,21 @@ class Legesystem{
 
                     //Lager resept-objekt
                     //Legger objektet i listen resepter
-                    
-                    // veldig bra! tror skrivReseptene i Lege skal funke nå
+
+                    // Veldig bra! Tror skrivReseptene i Lege skal funke nå
                 }
             }
         }
+    }
+
+    // kan være det er en del å hente fra trix 3.01 studentsystem-fila
+    public void meny(){
+        System.out.println("Hovedmeny:");
+        System.out.println("1: Skriv ut fullstendig liste over pasienter, lege, legemidler, og resepter.");
+        System.out.println("2: Skriv ut en resept.");
+        System.out.println("3: Bruk en resept.");
+        System.out.println("4: Skriv ut statestikk om systemet.");
+        System.out.println("5: Skriv alle data til fil."); // frivillig oppgave
+        System.out.println("0: Avslutt.")
     }
 }
