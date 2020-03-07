@@ -5,6 +5,7 @@ class Lege extends UlovligUtskrift implements Comparable<Lege> {
 	protected Lenkeliste<Resept> legensReseptListe = new Lenkeliste<>();
 	protected int ikkeSpesialist;
 
+
 	public Lege(String navnet, int ikkeSpesialist) {
 		navn = navnet;
 		this.ikkeSpesialist = ikkeSpesialist;
@@ -27,32 +28,66 @@ class Lege extends UlovligUtskrift implements Comparable<Lege> {
 	}
 
 	public HvitResept skrivHvitResept(Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift {
-		// LEGG INN UlovligUtskrift HER
-		HvitResept hvitResept = new HvitResept(legemiddel, this, pasient, reit);
-		legensReseptListe.leggTil(hvitResept);
-		return hvitResept;
+		if (legemiddel instanceof Narkotisk) {
+			if (ikkeSpesialist != 0) { 			// hvis Narkotisk og spesialist
+				HvitResept hvitResept = new HvitResept(legemiddel, this, pasient, reit);
+				legensReseptListe.leggTil(hvitResept);
+				return hvitResept;
+			} else if (ikkeSpesialist == 0) {	// hvis Narkotisk, men ikke spesialist
+				throw new UlovligUtskrift(this, legemiddel);
+			}
+		} else {								// hvis ikke Narkotisk
+			HvitResept hvitResept = new HvitResept(legemiddel, this, pasient, reit);
+			legensReseptListe.leggTil(hvitResept);
+			return hvitResept;
+		}
 	}
 
-	public MillitaerResept skrivMillitaerResept(Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift {
-		// LEGG INN UlovligUtskrift HER
-		MillitaerResept millitaerResept = new MillitaerResept(legemiddel, this, pasient, reit); // sjekk om det er riktig argumenter
-		legensReseptListe.leggTil(millitaerResept);
-		return millitaerResept;
+	public MilitaerResept skrivMilitaerResept(Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift {
+		if (legemiddel instanceof Narkotisk) {
+			if (ikkeSpesialist != 0) { 			// hvis Narkotisk og spesialist
+				MilitaerResept militaerResept = new MilitaerResept(legemiddel, this, pasient, reit);
+				legensReseptListe.leggTil(militaerResept);
+				return militaerResept;
+			} else if (ikkeSpesialist == 0) {	// Narkotisk, men ikke spesialist
+				throw new UlovligUtskrift(this, legemiddel);
+			}
+		} else {								// hvis ikke Narkotisk
+			MilitaerResept militaerResept = new MilitaerResept(legemiddel, this, pasient, reit);
+			legensReseptListe.leggTil(militaerResept);
+			return militaerResept;
+		}
 	}
 
 	public PResept skrivPResept(Legemiddel legemiddel, Pasient pasient) throws UlovligUtskrift {
-		// LEGG INN UlovligUtskrift HER
-		PResept pResept = new PResept(legemiddel, this, pasient); // fyll inn her
-		legensReseptListe.leggTil(pResept);
-		return pResept;
+		if (legemiddel instanceof Narkotisk) {
+			if (ikkeSpesialist != 0) { 			// hvis Narkotisk og spesialist
+				PResept pResept = new PResept(legemiddel, this, pasient);
+				legensReseptListe.leggTil(pResept);
+				return pResept;
+			} else if (ikkeSpesialist == 0) {	// Narkotisk, men ikke spesialist
+				throw new UlovligUtskrift(this, legemiddel);
+			}
+		} else {								// hvis ikke Narkotisk
+			PResept pResept = new PResept(legemiddel, this, pasient);
+			legensReseptListe.leggTil(pResept);
+			return pResept;
+		}
 	}
 
 	public BlaaResept skrivBlaaResept(Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift {
-		// LEGG INN UlovligUtskrift HER
-		BlaaResept blaaResept = new BlaaResept(legemiddel, this, pasient); // fyll inn her
-		legensReseptListe.leggTil(blaaResept);
-		return blaaResept;
+		if (legemiddel instanceof Narkotisk) {
+			if (ikkeSpesialist != 0) { 			// hvis Narkotisk og spesialist
+				BlaaResept blaaResept = new BlaaResept(legemiddel, this, pasient, reit);
+				legensReseptListe.leggTil(blaaResept);
+				return blaaResept;
+			} else if (ikkeSpesialist == 0) {	// Narkotisk, men ikke spesialist
+				throw new UlovligUtskrift(this, legemiddel);
+			}
+		} else {								// hvis ikke Narkotisk
+			BlaaResept blaaResept = new BlaaResept(legemiddel, this, pasient, reit);
+			legensReseptListe.leggTil(blaaResept);
+			return blaaResept;
+		}
 	}
-
-
 }
