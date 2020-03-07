@@ -34,17 +34,18 @@ class Legesystem{
                     String type = data[1];
                     float pris = Float.parseFloat(data[2]);
                     float virkestoff = Float.parseFloat(data[3]);
+                    Legemiddel legemiddel = null; // måtte visst opprette legemiddelet her for at det skulle kunne legges til lista uten at if-testene slår til, og da måtte jeg fjerne typen før legemiddel-variabelen når legemidlene opprettes i if-løkkene
 
                     if(type == "a"){ //Narkotisk
                         int styrke = Integer.parseInt(data[4]);
-                        Narkotisk legemiddel = new Narkotisk(navn, pris, virkestoff, styrke);
+                        legemiddel = new Narkotisk(navn, pris, virkestoff, styrke);
 
                     } else if(type == "b"){ //Vanedannende
                         int styrke = Integer.parseInt(data[4]);
-                        Vanedannende legemiddel= new Vanedannende(navn, pris, virkestoff, styrke);
+                        legemiddel= new Vanedannende(navn, pris, virkestoff, styrke);
 
                     } else if(type == "c"){ //Vanlig
-                        VanligLegemiddel legemiddel = new VanligLegemiddel(navn, pris, virkestoff);
+                        legemiddel = new VanligLegemiddel(navn, pris, virkestoff);
                     }
                 legemidler.leggTil(legemiddel);
 
@@ -57,7 +58,7 @@ class Legesystem{
                     String legeNavn = data[1];
                     Lege ritkigLege;
                     for(Lege enLege : leger){
-                        if(legenavn == enLege.hentNavn()){
+                        if(legeNavn == enLege.hentNavn()){
                             ritkigLege = enLege;
                         }
                     }
