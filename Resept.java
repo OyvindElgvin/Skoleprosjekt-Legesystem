@@ -7,7 +7,7 @@ abstract class Resept {
 	Lege utskrivendeLege;
 	protected Pasient pasient;
 	protected int reit;
-	protected static int IDTeller = -1;
+	protected static int IDTeller = 0;
 	protected int ID;
 
 	public Resept(Legemiddel legemiddel, Lege utskrivendeLege0, Pasient pasient0, int reit0) {
@@ -15,8 +15,9 @@ abstract class Resept {
 		utskrivendeLege = utskrivendeLege0;
 		pasient = pasient0;
 		reit = reit0;
-		IDTeller ++;
 		ID = IDTeller;
+		IDTeller ++;
+
 	}
 
 	// Abstrakte metoder subklassene skal implementere

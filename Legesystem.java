@@ -19,7 +19,7 @@ class Legesystem{
 
 
         while(scanner.hasNextLine()){
-            if(scanner.nextLine().startsWith("#")){//Ny type objekt
+            if(scanner.nextLine().startsWith("#")){ //Ny type objekt
                 objekttype++;
 
             } else {
@@ -34,7 +34,7 @@ class Legesystem{
                     String type = data[1];
                     float pris = Float.parseFloat(data[2]);
                     float virkestoff = Float.parseFloat(data[3]);
-                    Legemiddel legemiddel = null; // måtte visst opprette legemiddelet her for at det skulle kunne legges til lista uten at if-testene slår til, og da måtte jeg fjerne typen før legemiddel-variabelen når legemidlene opprettes i if-løkkene
+                    Legemiddel legemiddel = null; // måtte visst opprette legemiddelet her for at det skulle kunne legges til lista uten at if-testene slår til, og da måtte jeg fjerne typen før legemiddel-variabelen når legemidlene opprettes i if-løkkene :)
 
                     if(type == "a"){ //Narkotisk
                         int styrke = Integer.parseInt(data[4]);
@@ -70,6 +70,8 @@ class Legesystem{
 
                     //Lager resept-objekt
                     //Legger objektet i listen resepter
+                    
+                    // veldig bra! tror skrivReseptene i Lege skal funke nå
                 }
             }
         }

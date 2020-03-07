@@ -20,7 +20,7 @@ class Lege extends UlovligUtskrift implements Comparable<Lege> {
 	// Override av toString for å skrive ut relevant info som String
 	@Override
 	public String toString() {
-		return "Lege: "+hentNavn();
+		return "Lege: "+hentNavn()+"\nType: " + ikkeSpesialist;
 	}
 
 	// Henter ut reseptlista til legen
