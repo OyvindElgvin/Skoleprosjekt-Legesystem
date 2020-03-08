@@ -4,32 +4,38 @@ import java.util.Scanner;
 
 class Legesystem{
     //Liste som holder på ulike objekter
-    private Liste<Pasient> pasienter = new Lenkeliste<Pasient>();
+    protected Liste<Pasient> pasienter = new Lenkeliste<Pasient>();
     private Liste<Legemiddel> legemidler = new Lenkeliste<Legemiddel>();
     private Liste<Lege> leger = new SortertLenkeliste<Lege>();
     private Liste<Resept> resepter = new Lenkeliste<Resept>();
 
     //Metode som leser fra fil og setter objekter inn i listene
     //MANGLER UNNTAK...
-    public void LesFil(String filnavn) throws FileNotFoundException{
+    public void lesFil(String filnavn) throws FileNotFoundException{
         File fil = new File(filnavn);
         Scanner scanner = new Scanner(fil);
+
+
 
         int objekttype = 0; //Sier hvilke type objekt som leses
 
 
         while(scanner.hasNextLine()){
-            if(scanner.nextLine().startsWith("#")){ //Ny type objekt
+            if(scanner.nextLine().startsWith("#")){ //Ny type objekt     
                 objekttype++;
+                //System.out.println(scanner.nextLine());
 
             } else {
                 String[] data = scanner.nextLine().split(",");
+                System.out.println(data[0]+" "+data[1]);
 
                 if(objekttype == 1){ //Pasient
                     Pasient pasient = new Pasient(data[0], data[1]);
                     pasienter.leggTil(pasient);
+                    //System.out.println(pasient);
 
                 } else if(objekttype == 2){ //Legemidler
+                    //System.out.println(data[0]+" "+data[1]);
                     String navn = data[0];
                     String type = data[1];
                     float pris = Float.parseFloat(data[2]);
@@ -48,30 +54,32 @@ class Legesystem{
                         legemiddel = new VanligLegemiddel(navn, pris, virkestoff);
                     }
                 legemidler.leggTil(legemiddel);
+                //System.out.println(legemiddel);
 
                 } else if(objekttype == 3){ //Leger
-                    Lege lege = new Lege(data[0], Integer.parseInt(data[1]));
-                    leger.leggTil(lege);
+                    //System.out.println(data[0]+" "+data[1]);
+                    //Lege lege = new Lege(data[0], Integer.parseInt(data[1])); // denne funker ikke når data[1] = 0, ganske rart..
+                    //leger.leggTil(lege);
 
                 } else if(objekttype == 4){ //Resepter
                     Legemiddel legemiddel = legemidler.hent(Integer.parseInt(data[0]));
                     String legeNavn = data[1];
-                    Lege ritkigLege;
+                    Lege ritkigLege = null;
                     for(Lege enLege : leger){
                         if(legeNavn == enLege.hentNavn()){
                             ritkigLege = enLege;
                         }
                     }
+                    //System.out.println(ritkigLege);
                     Pasient pasient = pasienter.hent(Integer.parseInt(data[2]));
                     int reit;
                     if(data.length == 4){
                         reit = Integer.parseInt(data[3]);
                     }
+                    //System.out.println(pasient);
 
                     //Lager resept-objekt
                     //Legger objektet i listen resepter
-
-                    // Veldig bra! Tror skrivReseptene i Lege skal funke nå
                 }
             }
         }
