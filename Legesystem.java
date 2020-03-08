@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 class Legesystem{
     //Liste som holder på ulike objekter
-    Liste<Pasient> pasienter = new Lenkeliste<Pasient>();
-    Liste<Legemiddel> legemidler = new Lenkeliste<Legemiddel>();
-    Liste<Lege> leger = new SortertLenkeliste<Lege>();
-    Liste<Resept> resepter = new Lenkeliste<Resept>();
+    private Liste<Pasient> pasienter = new Lenkeliste<Pasient>();
+    private Liste<Legemiddel> legemidler = new Lenkeliste<Legemiddel>();
+    private Liste<Lege> leger = new SortertLenkeliste<Lege>();
+    private Liste<Resept> resepter = new Lenkeliste<Resept>();
 
     //Metode som leser fra fil og setter objekter inn i listene
     //MANGLER UNNTAK...
@@ -85,6 +85,6 @@ class Legesystem{
         System.out.println("3: Bruk en resept.");
         System.out.println("4: Skriv ut statestikk om systemet.");
         System.out.println("5: Skriv alle data til fil."); // frivillig oppgave
-        System.out.println("0: Avslutt.")
+        System.out.println("0: Avslutt.");
     }
 }
