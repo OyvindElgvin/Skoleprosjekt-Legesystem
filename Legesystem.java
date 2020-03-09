@@ -21,12 +21,13 @@ class Legesystem{
 
 
         while(scanner.hasNextLine()){
-            if(scanner.nextLine().startsWith("#")){ //Ny type objekt     
+            String linje = scanner.nextLine();
+            if(linje.startsWith("#")){ //Ny type objekt     
                 objekttype++;
-                //System.out.println(scanner.nextLine());
+                //System.out.println(linje);
 
             } else {
-                String[] data = scanner.nextLine().split(",");
+                String[] data = linje.split(",");
                 System.out.println(data[0]+" "+data[1]);
 
                 if(objekttype == 1){ //Pasient
