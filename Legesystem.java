@@ -24,11 +24,15 @@ class Legesystem{
             String linje = scanner.nextLine();
             if(linje.startsWith("#")){ //Ny type objekt     
                 objekttype++;
-                //System.out.println(linje);
+                System.out.println("\n" + linje); //Tester innlesing
 
             } else {
-                String[] data = linje.split(",");
-                System.out.println(data[0]+" "+data[1]);
+                String[] data = linje.split(", ");
+                
+                for(int i = 0; i < data.length; i++){ //Tester innlesing
+                    System.out.print(data[i] + ", ");
+                } 
+                System.out.println();
 
                 if(objekttype == 1){ //Pasient
                     Pasient pasient = new Pasient(data[0], data[1]);
