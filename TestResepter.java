@@ -7,7 +7,7 @@ class TestResepter {
 		Vanedannende vane = new Vanedannende("Cosylan", 1000, 0.01, 9);
 
 		// lege
-		Lege legen = new Lege("Bjørn");
+		Lege legen = new Lege("Bjørn", 0);
 		Spesialist spesialist = new Spesialist("Spesialist Werner", 128932);
 
 		// pasient
@@ -15,7 +15,7 @@ class TestResepter {
 		Pasient pasient1 = new Pasient("Georgeous", "241856");
 
 		// resepter
-		MillaResept millaResept = new MillaResept(metadon, legen, pasient0, 10);
+		MilitaerResept millaResept = new MilitaerResept(metadon, legen, pasient0, 10);
 		PResept pResept = new PResept(pPille, legen, pasient1);
 		BlaaResept blaaResept = new BlaaResept(metadon, spesialist, pasient0, 7);
 
@@ -35,7 +35,7 @@ class TestResepter {
 
 
 
-	public static void testMillaResept(MillaResept millaResept) {
+	public static void testMillaResept(MilitaerResept millaResept) {
 		System.out.println();
 		System.out.println("------MILLARESEPT-TEST------");
 		System.out.println(millaResept.hentLegemiddel()+"\n");

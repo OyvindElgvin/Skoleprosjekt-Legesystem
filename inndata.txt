@@ -13,8 +13,8 @@ Dr. Cox, 0
 Dr. Wilson, 0
 Dr. House, 12345
 Dr. Hillestad Lovold, 0
-# Resepter (legemiddelNummer, legeNavn, pasientID, reit)
-1, Dr. Cox, 2, 3
-2, Dr. Hillestad Lovold, 3, 10000
-0, Dr. House, 1, 1337
-3, Dr. Hillestad Lovold, 3, 2
+# Resepter (legemiddelNummer, legeNavn, pasientID, typeresept, reit)
+1, Dr. Cox, 2, hvit, 7
+2, Dr. Hillestad Lovold, 3, blaa, 1000
+0, Dr. House, 1, militaer, 12
+3, Dr. Hillestad Lovold, 3, p, 2

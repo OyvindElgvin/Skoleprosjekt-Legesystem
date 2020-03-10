@@ -5,9 +5,11 @@ import java.util.Scanner;
 class Legesystem{
     //Liste som holder på ulike objekter
     protected Liste<Pasient> pasienter = new Lenkeliste<Pasient>();
-    private Liste<Legemiddel> legemidler = new Lenkeliste<Legemiddel>();
-    private Liste<Lege> leger = new SortertLenkeliste<Lege>();
-    private Liste<Resept> resepter = new Lenkeliste<Resept>();
+    protected Liste<Legemiddel> legemidler = new Lenkeliste<Legemiddel>();
+    protected Liste<Lege> leger = new SortertLenkeliste<Lege>();
+    protected Liste<Resept> resepter = new Lenkeliste<Resept>();
+
+    Scanner scan = new Scanner(System.in);
 
     //Metode som leser fra fil og setter objekter inn i listene
     //MANGLER UNNTAK...
@@ -26,44 +28,42 @@ class Legesystem{
 
         while(scanner.hasNextLine()){
             String linje = scanner.nextLine();
-            if(linje.startsWith("#")){ //Ny type objekt     
+            if(linje.startsWith("#")){ //Ny type objekt
                 objekttype++;
-                System.out.println("\n" + linje); //Tester innlesing
+                //System.out.println("\n" + linje); //Tester innlesing
 
             } else {
                 String[] data = linje.trim().split("\\s*,\\s*"); //Må fjerne tomme tegn
                 
                 for(int i = 0; i < data.length; i++){ //Tester innlesing
                     System.out.print(data[i] + ", ");
-                } 
+                }
                 System.out.println();
+                */
 
                 if(objekttype == 1){ //Pasient
                     Pasient pasient = new Pasient(data[0], data[1]);
                     pasienter.leggTil(pasient);
-                    //System.out.println(pasient);
 
                 } else if(objekttype == 2){ //Legemidler
-                    //System.out.println(data[0]+" "+data[1]);
                     String navn = data[0];
                     String type = data[1];
                     float pris = Float.parseFloat(data[2]);
                     float virkestoff = Float.parseFloat(data[3]);
-                    Legemiddel legemiddel = null; // måtte visst opprette legemiddelet her for at det skulle kunne legges til lista uten at if-testene slår til, og da måtte jeg fjerne typen før legemiddel-variabelen når legemidlene opprettes i if-løkkene :)
+                    Legemiddel legemiddel = null;
 
-                    if(type == "a"){ //Narkotisk
+                    if(type.equals("a")){ //Narkotisk
                         int styrke = Integer.parseInt(data[4]);
                         legemiddel = new Narkotisk(navn, pris, virkestoff, styrke);
 
-                    } else if(type == "b"){ //Vanedannende
+                    } else if(type.equals("b")) { //Vanedannende
                         int styrke = Integer.parseInt(data[4]);
                         legemiddel= new Vanedannende(navn, pris, virkestoff, styrke);
 
-                    } else if(type == "c"){ //Vanlig
+                    } else if(type.equals("c")){ //Vanlig
                         legemiddel = new VanligLegemiddel(navn, pris, virkestoff);
                     }
                 legemidler.leggTil(legemiddel);
-                //System.out.println(legemiddel);
 
                 } else if(objekttype == 3){ //Leger
                     //System.out.println(data[0]+" "+data[1]);
@@ -71,24 +71,50 @@ class Legesystem{
                     leger.leggTil(lege);
 
                 } else if(objekttype == 4){ //Resepter
+                    //data[0] = data[0].trim();
+
                     Legemiddel legemiddel = legemidler.hent(Integer.parseInt(data[0]));
                     String legeNavn = data[1];
                     Lege ritkigLege = null;
                     for(Lege enLege : leger){
-                        if(legeNavn == enLege.hentNavn()){
+                        if(legeNavn.equals(enLege.hentNavn())){
                             ritkigLege = enLege;
                         }
                     }
                     //System.out.println(ritkigLege);
                     Pasient pasient = pasienter.hent(Integer.parseInt(data[2]));
-                    int reit;
+                    int reit = 0;
+                    Resept resepten = null;
                     if(data.length == 4){
                         reit = Integer.parseInt(data[3]);
                     }
-                    //System.out.println(pasient);
+                    if (data[3].equals("hvit")){
+                        try {
+                            resepten = ritkigLege.skrivHvitResept(legemiddel, pasient, reit);
+                        } catch (UlovligUtskrift u) {
+                            System.out.println(u.getMessage());
+                        }
+                    } else if (data[3].equals("militaer")) {
+                        try {
+                            resepten = ritkigLege.skrivMilitaerResept(legemiddel, pasient, reit);
+                        } catch (UlovligUtskrift u) {
+                            System.out.println(u.getMessage());
+                        }
+                    } else if (data[3].equals("p")) {
+                        try {
+                            resepten = ritkigLege.skrivPResept(legemiddel, pasient);
+                        } catch (UlovligUtskrift u) {
+                            System.out.println(u.getMessage());
+                        }
+                    } else if (data[3].equals("blaa")) {
+                        try {
+                            resepten = ritkigLege.skrivBlaaResept(legemiddel, pasient, reit);
+                        } catch (UlovligUtskrift u) {
+                            System.out.println(u.getMessage());
+                        }
+                    }
+                    resepter.leggTil(resepten);
 
-                    //Lager resept-objekt
-                    //Legger objektet i listen resepter
                 }
             }
         }
@@ -104,4 +130,33 @@ class Legesystem{
         System.out.println("5: Skriv alle data til fil."); // frivillig oppgave
         System.out.println("0: Avslutt.");
     }
+
+
+
+    public void ordrelokke(){
+
+        int inputFraBruker = -1;
+
+        while(inputFraBruker != 0){
+            if(inputFraBruker == 1){
+                seFullstendigListe();
+            } else if(inputFraBruker == 2){
+                skrivUtEnResept();
+            } else if(inputFraBruker == 3){
+                brukEnResept();
+            } else if(inputFraBruker == 4){
+                skrivUtStatestikk();
+            } else if(inputFraBruker == 5){
+                //skrivDataTilFil();
+            }
+            meny();
+            inputFraBruker = Integer.parseInt(scan.nextLine());
+        }
+    }
+
+    private static void seFullstendigListe(){}
+    private static void skrivUtEnResept(){}
+    private static void brukEnResept(){}
+    private static void skrivUtStatestikk(){}
+    private static void skrivDataTilFil(){}
 }

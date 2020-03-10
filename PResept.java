@@ -6,6 +6,12 @@ class PResept extends HvitResept {
 		super(legemiddel, utskrivendeLege, pasient, 3);
 	}
 
+	// Henter ut fargen på resepten
+	@Override
+	public String farge() {
+		return "Dette er en pResept";
+	}
+
 	// Setter ny pris etter avslaget, og gratis hvis avslaget > prisen
 	@Override
 	public double prisAaBetale() {

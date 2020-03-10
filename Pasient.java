@@ -1,6 +1,6 @@
 class Pasient{
     //Passient som tar inn navn og fødselsnummer
-    private String navn, fødselsnummer;
+    protected String navn, fødselsnummer;
 
     //Gir pasienten unik id
     private static int teller = 0;
