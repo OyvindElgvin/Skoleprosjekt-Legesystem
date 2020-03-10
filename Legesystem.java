@@ -108,6 +108,8 @@ class Legesystem{
         }
     }
 
+
+
     // kan være det er en del å hente fra trix 3.01 studentsystem-fila
     public void meny(){
         System.out.println("Hovedmeny:");
@@ -142,9 +144,20 @@ class Legesystem{
         }
     }
 
-    private static void seFullstendigListe(){}
-    private static void skrivUtEnResept(){}
-    private static void brukEnResept(){}
-    private static void skrivUtStatestikk(){}
-    private static void skrivDataTilFil(){}
+    protected static void seFullstendigListe(){}
+    protected static void skrivUtEnResept(){}
+
+    protected static void brukEnResept(){
+        skrivUtPasientListe();
+    }
+
+    protected static void skrivUtStatestikk(){}
+    protected static void skrivDataTilFil(){}
+
+    protected static String skrivUtPasientListe() {
+        System.out.println("Hvilken pasient vil du se resepter for?");
+        for (int i = 0; i < legesystemet.pasienter.stoerrelse(); i++) {
+			System.out.println(i +": "+ legesystemet.pasienter.hent(i).navn + " (fnr "+legesystemet.pasienter.hent(i).foedselsnummer+")");
+		}
+    }
 }

@@ -1,6 +1,6 @@
 class Pasient{
     //Passient som tar inn navn og fødselsnummer
-    protected String navn, fødselsnummer;
+    protected String navn, foedselsnummer;
 
     //Gir pasienten unik id
     private static int teller = 0;
@@ -9,9 +9,9 @@ class Pasient{
     //Oppretter en stabel som resepter skal samles i
     private Stabel<Resept> resepter = new Stabel<Resept>();
 
-    public Pasient(String navn, String fødselsnummer){
+    public Pasient(String navn, String foedselsnummer){
         this.navn = navn;
-        this.fødselsnummer = fødselsnummer;
+        this.foedselsnummer = foedselsnummer;
         id = teller;
         teller++;
     }
@@ -21,7 +21,7 @@ class Pasient{
     }
 
     public String hentFødselsnr(){
-        return fødselsnummer;
+        return foedselsnummer;
     }
 
     public int hentId(){
