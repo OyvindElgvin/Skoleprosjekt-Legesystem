@@ -34,6 +34,14 @@ class Legesystem{
             } else {
                 String[] data = linje.trim().split("\\s*,\\s*"); //Må fjerne tomme tegn
 
+                /*
+                for(int i = 0; i < data.length; i++){ //Tester innlesing
+                    System.out.print(data[i] + ", ");
+                }
+                System.out.println();
+                */
+
+
                 if(objekttype == 1){ //Pasient
                     Pasient pasient = new Pasient(data[0], data[1]);
                     pasienter.leggTil(pasient);
@@ -146,6 +154,30 @@ class Legesystem{
             inputFraBruker = Integer.parseInt(scan.nextLine());
         }
     }
+
+
+    private static void seFullstendigListe(){
+      System.out.println("--- Liste over leger ---");
+      System.out.println("\n\n");
+      System.out.println("--- Liste over pasienter ---");
+      skrivUtPasientListe();
+
+  		}
+    }
+    private static void skrivUtLegeliste(){
+      for (int i = 0; i < leger.stoerrelse(); i++) {
+  			System.out.println(leger.hent(i).navn);
+      }
+    }
+
+    private static void skrivUtEnResept(){}
+    private static void brukEnResept(){}
+    private static void skrivUtStatestikk(){}
+    private static void skrivDataTilFil(){}
+    /*
+    protected static void seFullstendigListe(){}
+    protected static void skrivUtEnResept(){}
+
 
     //protected static void seFullstendigListe(){}
     protected static void leggTilElement(){
