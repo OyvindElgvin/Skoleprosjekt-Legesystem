@@ -24,15 +24,16 @@ class Legesystem{
             String linje = scanner.nextLine();
             if(linje.startsWith("#")){ //Ny type objekt
                 objekttype++;
-                System.out.println("\n" + linje); //Tester innlesing
+                //System.out.println("\n" + linje); //Tester innlesing
 
             } else {
                 String[] data = linje.split(", ");
-
+                /*
                 for(int i = 0; i < data.length; i++){ //Tester innlesing
                     System.out.print(data[i] + ", ");
                 }
                 System.out.println();
+                */
 
                 if(objekttype == 1){ //Pasient
                     Pasient pasient = new Pasient(data[0], data[1]);
@@ -43,33 +44,32 @@ class Legesystem{
                     String type = data[1];
                     float pris = Float.parseFloat(data[2]);
                     float virkestoff = Float.parseFloat(data[3]);
-                    Legemiddel legemiddel = null; // måtte visst opprette legemiddelet her for at det skulle kunne legges til lista uten at if-testene slår til, og da måtte jeg fjerne typen før legemiddel-variabelen når legemidlene opprettes i if-løkkene :)
+                    Legemiddel legemiddel = null;
 
-                    if(type == "a"){ //Narkotisk
+                    if(type.equals("a")){ //Narkotisk
                         int styrke = Integer.parseInt(data[4]);
                         legemiddel = new Narkotisk(navn, pris, virkestoff, styrke);
 
-                    } else if(type == "b"){ //Vanedannende
+                    } else if(type.equals("b")) { //Vanedannende
                         int styrke = Integer.parseInt(data[4]);
                         legemiddel= new Vanedannende(navn, pris, virkestoff, styrke);
 
-                    } else if(type == "c"){ //Vanlig
+                    } else if(type.equals("c")){ //Vanlig
                         legemiddel = new VanligLegemiddel(navn, pris, virkestoff);
                     }
                 legemidler.leggTil(legemiddel);
-                //System.out.println(legemiddel);
 
                 } else if(objekttype == 3){ //Leger
-                    //System.out.println(data[0]+" "+data[1]);
-                    //Lege lege = new Lege(data[0], Integer.parseInt(data[1])); // denne funker ikke når data[1] = 0, ganske rart..
-                    //leger.leggTil(lege);
+                    data[1] = data[1].trim();
+                    Lege lege = new Lege(data[0], Integer.parseInt(data[1]));
+                    leger.leggTil(lege);
 
                 } else if(objekttype == 4){ //Resepter
                     Legemiddel legemiddel = legemidler.hent(Integer.parseInt(data[0]));
                     String legeNavn = data[1];
                     Lege ritkigLege = null;
                     for(Lege enLege : leger){
-                        if(legeNavn == enLege.hentNavn()){
+                        if(legeNavn.equals(enLege.hentNavn())){
                             ritkigLege = enLege;
                         }
                     }
@@ -78,6 +78,10 @@ class Legesystem{
                     int reit;
                     if(data.length == 4){
                         reit = Integer.parseInt(data[3]);
+                    }
+                    if (data[3].equals("hvit")){
+                        //Resept resepten = ritkigLege.skrivHvitResept(legemiddel, pasient, reit);
+                        //resepter.leggTil(resepten);
                     }
                     //System.out.println(pasient);
 
