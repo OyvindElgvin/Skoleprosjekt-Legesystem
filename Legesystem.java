@@ -129,21 +129,23 @@ class Legesystem{
 
         while(inputFraBruker != 0){
             if(inputFraBruker == 1){
-                seFullstendigListe();
+                //seFullstendigListe();
             } else if(inputFraBruker == 2){
-                skrivUtEnResept();
+                //skrivUtEnResept();
             } else if(inputFraBruker == 3){
-                brukEnResept();
+                //brukEnResept();
             } else if(inputFraBruker == 4){
-                skrivUtStatestikk();
+                //skrivUtStatestikk();
             } else if(inputFraBruker == 5){
                 //skrivDataTilFil();
+            } else if (6 < inputFraBruker || inputFraBruker < -1) {
+                System.out.println("Velg en av de fem alternativene");
             }
             meny();
             inputFraBruker = Integer.parseInt(scan.nextLine());
         }
     }
-
+    /*
     protected static void seFullstendigListe(){}
     protected static void skrivUtEnResept(){}
 
@@ -160,4 +162,5 @@ class Legesystem{
 			System.out.println(i +": "+ legesystemet.pasienter.hent(i).navn + " (fnr "+legesystemet.pasienter.hent(i).foedselsnummer+")");
 		}
     }
+    */
 }
