@@ -17,7 +17,6 @@ abstract class Resept {
 		reit = reit0;
 		ID = IDTeller;
 		IDTeller ++;
-
 	}
 
 	// Abstrakte metoder subklassene skal implementere
@@ -53,7 +52,10 @@ abstract class Resept {
 	// brukt, og det trekkes fra reiten til resepten er tom.
 	public boolean bruk(int antallBruk) {
 		int teller = 0;
-		if (reit-antallBruk > 0) {
+		if (reit == 0) {
+			System.out.println("Det var ingen reit igjen på resepten. Du får høre med legen om du kan få ny resept.");
+			return false;
+		} else if (reit-antallBruk > 0) {
 			reit -= antallBruk;
 			return true;
 		} else {

@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+
+
 class Legesystem{
     //Liste som holder på ulike objekter
     protected Liste<Pasient> pasienter = new Lenkeliste<Pasient>();
@@ -156,31 +158,28 @@ class Legesystem{
     }
 
 
-    private static void seFullstendigListe(){
+    private void seFullstendigListe(){
       System.out.println("--- Liste over leger ---");
       System.out.println("\n\n");
       System.out.println("--- Liste over pasienter ---");
-      skrivUtPasientListe();
+      skrivUtPasientliste();
 
-  		}
+
     }
-    private static void skrivUtLegeliste(){
+    private void skrivUtLegeliste(){
       for (int i = 0; i < leger.stoerrelse(); i++) {
   			System.out.println(leger.hent(i).navn);
       }
     }
 
-    private static void skrivUtEnResept(){}
-    private static void brukEnResept(){}
+
     private static void skrivUtStatestikk(){}
     private static void skrivDataTilFil(){}
-    /*
-    protected static void seFullstendigListe(){}
     protected static void skrivUtEnResept(){}
 
 
     //protected static void seFullstendigListe(){}
-    protected static void leggTilElement(){
+    protected void leggTilElement(){
         int inputFraBruker = -1;
 
         while(inputFraBruker != 0){
@@ -209,19 +208,29 @@ class Legesystem{
     }
 
 
-    protected static void brukEnResept(){
-        skrivUtPasientListe();
-    }
-
-    //protected static void skrivUtStatestikk(){}
-    //protected static void skrivDataTilFil(){}
-
-    protected void skrivUtPasientListe() {
+    protected void brukEnResept(){
         System.out.println("Hvilken pasient vil du se resepter for?");
-        for (int i = 0; i < pasienter.stoerrelse(); i++) {
-			System.out.println(i +": "+ pasienter.hent(i).navn + " (fnr "+pasienter.hent(i).foedselsnummer+")");
-		}
-
+        skrivUtPasientliste();
+        int index = Integer.parseInt(scan.nextLine());
+        Pasient pasient = pasienter.hent(index);
+        System.out.println("Valgt pasient: " + pasient);
+        System.out.println("Hvilken resept vil du bruke?");
+        skrivUtReseptliste();
+        index = Integer.parseInt(scan.nextLine());
+        if (resepter.hent(index).bruk(1)){
+            System.out.println("Brukte resept på " + resepter.hent(index).legemiddelet.navn+". Antall gjenvarende reit: "+ resepter.hent(index).reit);
+        }
     }
 
+    protected void skrivUtPasientliste() {
+        for (int i = 0; i < pasienter.stoerrelse(); i++) {
+            System.out.println(i +": "+ pasienter.hent(i).toString());
+		}
+    }
+
+    protected void skrivUtReseptliste() {
+        for (int i = 0; i < resepter.stoerrelse(); i++) {
+            System.out.println(i +": "+ resepter.hent(i).legemiddelet.navn +" "+ resepter.hent(i).reit);
+		}
+    }
 }

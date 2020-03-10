@@ -35,4 +35,9 @@ class Pasient{
     public void leggTilResept(Resept resept){
         resepter.leggPaa(resept);
     }
+
+    @Override
+    public String toString(){
+        return navn + " (fnr " + foedselsnummer + ")";
+    }
 }
