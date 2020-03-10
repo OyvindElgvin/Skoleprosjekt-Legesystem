@@ -109,10 +109,7 @@ class Legesystem{
                         }
                     }
                     resepter.leggTil(resepten);
-                    //System.out.println(pasient);
 
-                    //Lager resept-objekt
-                    //Legger objektet i listen resepter
                 }
             }
         }
