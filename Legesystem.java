@@ -119,18 +119,6 @@ class Legesystem{
 
 
 
-    // kan være det er en del å hente fra trix 3.01 studentsystem-fila
-    public void meny(){
-        System.out.println();
-        System.out.println("Hovedmeny:");
-        System.out.println("1: Skriv ut fullstendig liste over pasienter, lege, legemidler, og resepter.");
-        System.out.println("2: Legg til pasient, lege, legemiddel eller resept.");
-        System.out.println("3: Bruk en resept.");
-        System.out.println("4: Skriv ut statestikk om systemet.");
-        System.out.println("5: Skriv alle data til fil."); // frivillig oppgave
-        System.out.println("0: Avslutt.");
-    }
-
 
 
     public void ordrelokke(){
@@ -143,7 +131,7 @@ class Legesystem{
             } else if(inputFraBruker == 2){
                 leggTilElement();
             } else if(inputFraBruker == 3){
-                //brukEnResept();
+                brukEnResept();
             } else if(inputFraBruker == 4){
                 //skrivUtStatestikk();
             } else if(inputFraBruker == 5){
@@ -151,13 +139,20 @@ class Legesystem{
             } else if (6 < inputFraBruker || inputFraBruker < -1) {
                 System.out.println("Velg en av de fem alternativene");
             }
-            meny();
+            System.out.println();
+            System.out.println("Hovedmeny:");
+            System.out.println("1: Skriv ut fullstendig liste over pasienter, lege, legemidler, og resepter.");
+            System.out.println("2: Legg til pasient, lege, legemiddel eller resept.");
+            System.out.println("3: Bruk en resept.");
+            System.out.println("4: Skriv ut statestikk om systemet.");
+            System.out.println("5: Skriv alle data til fil."); // frivillig oppgave
+            System.out.println("0: Avslutt.");
             inputFraBruker = Integer.parseInt(scan.nextLine());
         }
     }
 
-
     /*
+
     private static void seFullstendigListe(){
       System.out.println("--- Liste over leger ---");
       System.out.println("\n\n");
@@ -166,18 +161,30 @@ class Legesystem{
 
 
     }
+
     private void skrivUtLegeliste(){
       for (int i = 0; i < leger.stoerrelse(); i++) {
   			System.out.println(leger.hent(i).navn);
       }
     }
 
+    protected void skrivUtPasientliste() {
+        for (int i = 0; i < pasienter.stoerrelse(); i++) {
+            System.out.println(i +": "+ pasienter.hent(i).toString());
+		}
+    }
+    protected void skrivUtReseptliste() {
+        for (int i = 0; i < resepter.stoerrelse(); i++) {
+            System.out.println(i +": "+ resepter.hent(i).legemiddelet.navn +" "+ resepter.hent(i).reit);
+		}
+    }
+
 
     private static void skrivUtStatestikk(){}
     private static void skrivDataTilFil(){}
     protected static void skrivUtEnResept(){}
-
     */
+
     //protected static void seFullstendigListe(){}
     protected void leggTilElement(){
         int inputFraBruker = -1;
@@ -256,26 +263,28 @@ class Legesystem{
 
     protected void brukEnResept(){
         System.out.println("Hvilken pasient vil du se resepter for?");
-        skrivUtPasientliste();
-        int index = Integer.parseInt(scan.nextLine());
-        Pasient pasient = pasienter.hent(index);
+
+        for (int i = 0; i < pasienter.stoerrelse(); i++) {
+            System.out.println(i +": "+ pasienter.hent(i).toString()); // Lister opp pasientene
+		}
+        int inputFraBruker = Integer.parseInt(scan.nextLine());
+        if (pasienter.stoerrelse() < inputFraBruker || inputFraBruker < -1) { // blir feil her hvis inputen er en større enn lista..
+            System.out.println("Feil inntasting! Tallet var utenfor lista.");
+        }
+        Pasient pasient = pasienter.hent(inputFraBruker);
         System.out.println("Valgt pasient: " + pasient);
         System.out.println("Hvilken resept vil du bruke?");
-        skrivUtReseptliste();
-        index = Integer.parseInt(scan.nextLine());
-        if (resepter.hent(index).bruk(1)){
-            System.out.println("Brukte resept på " + resepter.hent(index).legemiddelet.navn+". Antall gjenvarende reit: "+ resepter.hent(index).reit);
+
+        System.out.println(pasient.hentResepter().hent()); // fortsett her
+        //for (int i = 0; i < resepter.stoerrelse(); i++) {
+        //    System.out.println(i +": "+ resepter.hent(i).legemiddelet.navn +" "+ resepter.hent(i).reit); // Lister opp reseptene til pasienten
+		//}
+        int inputFraBruker1 = Integer.parseInt(scan.nextLine());
+        if (pasienter.stoerrelse() < inputFraBruker1 || inputFraBruker1 < -1) {
+            System.out.println("Feil inntasting! Tallet var utenfor lista.");
         }
-
-
-    protected void skrivUtPasientliste() {
-        for (int i = 0; i < pasienter.stoerrelse(); i++) {
-            System.out.println(i +": "+ pasienter.hent(i).toString());
-		}
-
-    protected void skrivUtReseptliste() {
-        for (int i = 0; i < resepter.stoerrelse(); i++) {
-            System.out.println(i +": "+ resepter.hent(i).legemiddelet.navn +" "+ resepter.hent(i).reit);
-		}
+        if (resepter.hent(inputFraBruker1).bruk(1)){
+            System.out.println("Brukte resept på " + resepter.hent(inputFraBruker1).legemiddelet.navn+". Antall gjenvarende reit: "+ resepter.hent(inputFraBruker1).reit);
+        }
     }
 }
