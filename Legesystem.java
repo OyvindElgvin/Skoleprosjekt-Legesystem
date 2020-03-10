@@ -122,7 +122,7 @@ class Legesystem{
     public void meny(){
         System.out.println("Hovedmeny:");
         System.out.println("1: Skriv ut fullstendig liste over pasienter, lege, legemidler, og resepter.");
-        System.out.println("2: Skriv ut en resept.");
+        System.out.println("2: Legg til pasient, lege, legemiddel eller resept.");
         System.out.println("3: Bruk en resept.");
         System.out.println("4: Skriv ut statestikk om systemet.");
         System.out.println("5: Skriv alle data til fil."); // frivillig oppgave
@@ -139,7 +139,7 @@ class Legesystem{
             if(inputFraBruker == 1){
                 //seFullstendigListe();
             } else if(inputFraBruker == 2){
-                //skrivUtEnResept();
+                leggTilElement();
             } else if(inputFraBruker == 3){
                 //brukEnResept();
             } else if(inputFraBruker == 4){
@@ -153,6 +153,7 @@ class Legesystem{
             inputFraBruker = Integer.parseInt(scan.nextLine());
         }
     }
+
 
     private static void seFullstendigListe(){
       System.out.println("--- Liste over leger ---");
@@ -176,6 +177,37 @@ class Legesystem{
     protected static void seFullstendigListe(){}
     protected static void skrivUtEnResept(){}
 
+
+    //protected static void seFullstendigListe(){}
+    protected static void leggTilElement(){
+        int inputFraBruker = -1;
+
+        while(inputFraBruker != 0){
+            System.out.println("Hva vil du legge til?");
+            System.out.println("1: Pasient.");
+            System.out.println("2: Lege.");
+            System.out.println("3: Legemiddel.");
+            System.out.println("4: Resept.");
+            System.out.println("0: Gå tilbake.");
+
+            if(inputFraBruker == 1){
+                //Legger til pasient
+            } else if(inputFraBruker == 2){
+                //Legger til lege
+            } else if(inputFraBruker == 3){
+                //Legger til legemiddel
+            } else if(inputFraBruker == 4){
+                //Legger til resept
+            } else if(inputFraBruker == 0){
+                ordrelokke(); //Går tilbake
+            } else if (5 < inputFraBruker || inputFraBruker < -1) {
+                System.out.println("Velg en av de fem alternativene!");
+            }
+            inputFraBruker = Integer.parseInt(scan.nextLine());
+        }
+    }
+
+    /*
     protected static void brukEnResept(){
         skrivUtPasientListe();
     }
