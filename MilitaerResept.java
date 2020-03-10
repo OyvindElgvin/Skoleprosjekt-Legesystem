@@ -1,9 +1,9 @@
-class MillaResept extends HvitResept {
+class MilitaerResept extends HvitResept {
 
 	// Kort for militærResept.
 	// Resept med egen ID uten avnslag.
 
-	public MillaResept(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient, int reit) {
+	public MilitaerResept(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient, int reit) {
 		super(legemiddel, utskrivendeLege, pasient, reit);
 	}
 

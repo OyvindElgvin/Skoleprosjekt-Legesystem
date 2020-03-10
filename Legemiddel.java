@@ -5,7 +5,7 @@ abstract class Legemiddel {
 	protected String navn;
 	protected double pris;
 	protected double virkestoff;
-	protected static int IDTeller = -1;
+	protected static int IDTeller = 0;
 	protected int ID;
 
 
@@ -13,8 +13,9 @@ abstract class Legemiddel {
 		navn = navnet;
 		pris = prisen;
 		virkestoff = virkestoffet;
-		IDTeller ++;
 		ID = IDTeller;
+		IDTeller ++;
+
 	}
 
 	// Henter ID til legemiddelet

@@ -1,4 +1,5 @@
-class Lenkeliste <T> implements Liste <T> {
+import java.util.Iterator;
+class Lenkeliste<T> implements Liste<T> {
 
 	/*
 	En lenkeliste med start til venstre og slutt til høyre
@@ -19,12 +20,21 @@ class Lenkeliste <T> implements Liste <T> {
 		Node neste = null;
 	}
 
+
 	public Iterator<Lenkeliste<T>> iterator(){
 		return new LenkelisteIterator();
 	}
 
 	// oppretter en LenkelisteIterator med hasNext() og next()
 	class LenkelisteIterator implements Iterator<Lenkeliste>{
+
+	// Iterator
+	public Iterator<T> iterator(){
+		return new LenkelisteIterator(this);
+	}
+
+	// indre klasse LenkelisteIterator med hasNext() og next()
+	class LenkelisteIterator implements Iterator<T>{
 		private Lenkeliste<T> enListe;
 		private int pos;
 
