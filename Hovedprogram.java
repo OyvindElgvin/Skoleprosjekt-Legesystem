@@ -17,7 +17,7 @@ class Hovedprogram {
 
 		// Oppretter resepter
 		HvitResept hvitResept = new HvitResept(vanedannende, lege, pasient0, 12);
-		MillaResept millaResept = new MillaResept(vanedannende2, lege, pasient1, 23);
+		MilitaerResept millaResept = new MilitaerResept(vanedannende2, lege, pasient1, 23);
 		PResept pResept = new PResept(vanligLegemiddel, spesialist, pasient0);
 		BlaaResept blaaResept = new BlaaResept(narkotisk, spesialist, pasient1, 34);
 
@@ -32,7 +32,7 @@ class Hovedprogram {
 	public static void testToString(Lege lege, Spesialist spesialist, Narkotisk narkotisk,
 									Vanedannende vanedannende, Vanedannende vanedannende2,
 									VanligLegemiddel vanligLegemiddel, HvitResept hvitResept,
-									MillaResept millaResept,PResept pResept, BlaaResept blaaResept) {
+									MilitaerResept millaResept,PResept pResept, BlaaResept blaaResept) {
 		// Skriver ut relevant informasjon om alle instansene
 		System.out.println();
 		System.out.println("-----------LEGE-----------");

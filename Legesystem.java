@@ -8,6 +8,7 @@ class Legesystem{
     protected Liste<Legemiddel> legemidler = new Lenkeliste<Legemiddel>();
     protected Liste<Lege> leger = new SortertLenkeliste<Lege>();
     protected Liste<Resept> resepter = new Lenkeliste<Resept>();
+
     Scanner scan = new Scanner(System.in);
 
     //Metode som leser fra fil og setter objekter inn i listene
@@ -65,6 +66,8 @@ class Legesystem{
                     leger.leggTil(lege);
 
                 } else if(objekttype == 4){ //Resepter
+                    //data[0] = data[0].trim();
+
                     Legemiddel legemiddel = legemidler.hent(Integer.parseInt(data[0]));
                     String legeNavn = data[1];
                     Lege ritkigLege = null;
@@ -75,14 +78,37 @@ class Legesystem{
                     }
                     //System.out.println(ritkigLege);
                     Pasient pasient = pasienter.hent(Integer.parseInt(data[2]));
-                    int reit;
+                    int reit = 0;
+                    Resept resepten = null;
                     if(data.length == 4){
                         reit = Integer.parseInt(data[3]);
                     }
                     if (data[3].equals("hvit")){
-                        //Resept resepten = ritkigLege.skrivHvitResept(legemiddel, pasient, reit);
-                        //resepter.leggTil(resepten);
+                        try {
+                            resepten = ritkigLege.skrivHvitResept(legemiddel, pasient, reit);
+                        } catch (UlovligUtskrift u) {
+                            System.out.println(u.getMessage());
+                        }
+                    } else if (data[3].equals("militaer")) {
+                        try {
+                            resepten = ritkigLege.skrivMilitaerResept(legemiddel, pasient, reit);
+                        } catch (UlovligUtskrift u) {
+                            System.out.println(u.getMessage());
+                        }
+                    } else if (data[3].equals("p")) {
+                        try {
+                            resepten = ritkigLege.skrivMilitaerResept(legemiddel, pasient, reit);
+                        } catch (UlovligUtskrift u) {
+                            System.out.println(u.getMessage());
+                        }
+                    } else if (data[3].equals("blaa")) {
+                        try {
+                            resepten = ritkigLege.skrivBlaaResept(legemiddel, pasient, reit);
+                        } catch (UlovligUtskrift u) {
+                            System.out.println(u.getMessage());
+                        }
                     }
+                    resepter.leggTil(resepten);
                     //System.out.println(pasient);
 
                     //Lager resept-objekt

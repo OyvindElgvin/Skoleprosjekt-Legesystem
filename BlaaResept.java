@@ -12,7 +12,7 @@ class BlaaResept extends Resept {
 	// Henter ut fargen på resepten
 	@Override
 	public String farge() {
-		return "Dette er en blaa resept";
+		return "Dette er en blaaResept";
 	}
 
 	// Henter prisen på legemiddelet med avslaget

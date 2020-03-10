@@ -9,7 +9,7 @@ class HvitResept extends Resept {
 	// Henter ut fargen på resepten
 	@Override
 	public String farge() {
-		return "Dette er en hvit resept";
+		return "Dette er en hvitResept";
 	}
 
 	// Henter prisen på legemiddelet uten noen avslag

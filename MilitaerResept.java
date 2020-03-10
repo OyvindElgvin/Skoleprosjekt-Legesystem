@@ -7,11 +7,18 @@ class MilitaerResept extends HvitResept {
 		super(legemiddel, utskrivendeLege, pasient, reit);
 	}
 
+	// Henter ut fargen på resepten
+	@Override
+	public String farge() {
+		return "Dette er en militaerResept";
+	}
+
 	// Henter prisen på legemiddelet uten noen avslag
 	@Override
 	public double prisAaBetale() {
 		return 0;
 	}
+
 
 	// Override av toString for å skrive ut relevant info som String
 	@Override
