@@ -20,14 +20,6 @@ class Lenkeliste<T> implements Liste<T> {
 		Node neste = null;
 	}
 
-
-	public Iterator<Lenkeliste<T>> iterator(){
-		return new LenkelisteIterator();
-	}
-
-	// oppretter en LenkelisteIterator med hasNext() og next()
-	class LenkelisteIterator implements Iterator<Lenkeliste>{
-
 	// Iterator
 	public Iterator<T> iterator(){
 		return new LenkelisteIterator(this);
