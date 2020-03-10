@@ -30,16 +30,9 @@ class Legesystem{
             String linje = scanner.nextLine();
             if(linje.startsWith("#")){ //Ny type objekt
                 objekttype++;
-                //System.out.println("\n" + linje); //Tester innlesing
 
             } else {
                 String[] data = linje.trim().split("\\s*,\\s*"); //Må fjerne tomme tegn
-                
-                for(int i = 0; i < data.length; i++){ //Tester innlesing
-                    System.out.print(data[i] + ", ");
-                }
-                System.out.println();
-                */
 
                 if(objekttype == 1){ //Pasient
                     Pasient pasient = new Pasient(data[0], data[1]);
@@ -66,13 +59,10 @@ class Legesystem{
                 legemidler.leggTil(legemiddel);
 
                 } else if(objekttype == 3){ //Leger
-                    //System.out.println(data[0]+" "+data[1]);
                     Lege lege = new Lege(data[0], Integer.parseInt(data[1])); // denne funker ikke når data[1] = 0, ganske rart..
                     leger.leggTil(lege);
 
                 } else if(objekttype == 4){ //Resepter
-                    //data[0] = data[0].trim();
-
                     Legemiddel legemiddel = legemidler.hent(Integer.parseInt(data[0]));
                     String legeNavn = data[1];
                     Lege ritkigLege = null;
@@ -81,7 +71,6 @@ class Legesystem{
                             ritkigLege = enLege;
                         }
                     }
-                    //System.out.println(ritkigLege);
                     Pasient pasient = pasienter.hent(Integer.parseInt(data[2]));
                     int reit = 0;
                     Resept resepten = null;
@@ -114,7 +103,6 @@ class Legesystem{
                         }
                     }
                     resepter.leggTil(resepten);
-
                 }
             }
         }
