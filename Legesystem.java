@@ -12,7 +12,6 @@ class Legesystem{
     Scanner scan = new Scanner(System.in);
 
     //Metode som leser fra fil og setter objekter inn i listene
-    //MANGLER UNNTAK...
     public void lesFil(String filnavn) throws FileNotFoundException{
         Scanner scanner = null;
         try{
@@ -142,7 +141,7 @@ class Legesystem{
             } else if(inputFraBruker == 2){
                 leggTilElement();
             } else if(inputFraBruker == 3){
-                brukEnResept();
+                //brukEnResept();
             } else if(inputFraBruker == 4){
                 //skrivUtStatestikk();
             } else if(inputFraBruker == 5){
@@ -155,7 +154,7 @@ class Legesystem{
         }
     }
 
-
+    /*
     private static void seFullstendigListe(){
       System.out.println("--- Liste over leger ---");
       System.out.println("\n\n");
@@ -178,25 +177,63 @@ class Legesystem{
     protected static void seFullstendigListe(){}
     protected static void skrivUtEnResept(){}
 
-
+    */
     //protected static void seFullstendigListe(){}
-    protected static void leggTilElement(){
+    protected void leggTilElement(){
         int inputFraBruker = -1;
 
         while(inputFraBruker != 0){
-            System.out.println("Hva vil du legge til?");
-            System.out.println("1: Pasient.");
-            System.out.println("2: Lege.");
-            System.out.println("3: Legemiddel.");
-            System.out.println("4: Resept.");
-            System.out.println("0: Gå tilbake.");
+            if(inputFraBruker == 1){ //Legger til pasient
+                System.out.println();
+                System.out.println("Hva heter pasienten?");
+                String pasientNavn = scan.nextLine();
 
-            if(inputFraBruker == 1){
-                //Legger til pasient
-            } else if(inputFraBruker == 2){
-                //Legger til lege
-            } else if(inputFraBruker == 3){
-                //Legger til legemiddel
+                System.out.println("Hva er fødselsnummeret til pasienten?");
+                String foedselsnummer = scan.nextLine();
+
+                pasienter.leggTil(new Pasient(pasientNavn, foedselsnummer));
+                System.out.println("Pasienten er lagt til i systemet.");
+            } else if(inputFraBruker == 2){ //Legger til lege
+                System.out.println();
+                System.out.println("Hva heter legen?");
+                String legeNavn = scan.nextLine();
+
+                System.out.println("Hva er kontrollID til legen? (0 hvis ingen)");
+                int kontrollId = Integer.parseInt(scan.nextLine());
+
+                leger.leggTil(new Lege(legeNavn, kontrollId));
+                System.out.println("Legen er lagt til i systemet.");
+            } else if(inputFraBruker == 3){ //Legger til legemiddel
+                System.out.println();
+                System.out.println("Hvilke type legemiddel vil du legge til?");
+                System.out.println("1: Narkotisk.");
+                System.out.println("2: Vanedannende.");
+                System.out.println("3: Vanlig.");
+                int type = Integer.parseInt(scan.nextLine());
+
+                System.out.println("Hva heter legemiddelet?");
+                String legemiddelNavn = scan.nextLine();
+
+                System.out.println("Hva er prisen på legemiddelet?");
+                float pris = Float.parseFloat(scan.nextLine());
+
+                System.out.println("Hvor mye virkemiddel?");
+                float virkemiddel = Float.parseFloat(scan.nextLine());
+
+                Legemiddel legemiddel = null;  
+                if(type == 1 || type == 2){
+                    System.out.println("Hva er styrken på legemiddelet?");
+                    int styrke = Integer.parseInt(scan.nextLine());
+                    if(type == 1){
+                        legemiddel = new Narkotisk(legemiddelNavn, pris, virkemiddel, styrke);
+                    } else{
+                        legemiddel = new Vanedannende(legemiddelNavn, pris, virkemiddel, styrke);
+                    }
+                }
+
+                legemiddel = new VanligLegemiddel(legemiddelNavn, pris, virkemiddel);
+                legemidler.leggTil(legemiddel);
+                System.out.println("Legemiddelet er lagt til i systemet.");
             } else if(inputFraBruker == 4){
                 //Legger til resept
             } else if(inputFraBruker == 0){
@@ -204,11 +241,19 @@ class Legesystem{
             } else if (5 < inputFraBruker || inputFraBruker < -1) {
                 System.out.println("Velg en av de fem alternativene!");
             }
+            System.out.println();
+            System.out.println("Hva vil du legge til?");
+            System.out.println("1: Pasient.");
+            System.out.println("2: Lege.");
+            System.out.println("3: Legemiddel.");
+            System.out.println("4: Resept.");
+            System.out.println("0: Gå tilbake.");
+
             inputFraBruker = Integer.parseInt(scan.nextLine());
         }
     }
 
-
+    /*
     protected static void brukEnResept(){
         skrivUtPasientListe();
     }
@@ -222,6 +267,6 @@ class Legesystem{
 			System.out.println(i +": "+ pasienter.hent(i).navn + " (fnr "+pasienter.hent(i).foedselsnummer+")");
 		}
 
-    }
+    }*/
 
 }
