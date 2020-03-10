@@ -13,7 +13,6 @@ class Test {
 
 		}
 
-
 		System.out.println();
 		System.out.println("---OBJEKTENE I LISTENE---");
 		System.out.println();
@@ -46,12 +45,5 @@ class Test {
 			}
 			System.out.println(legesystemet.resepter.hent(i).farge());
 		}
-
-
-		//System.out.println("Antallet pasienter: " + legesystemet.pasienter.stoerrelse());
-		//System.out.println("Antallet legemidler: " + legesystemet.legemidler.stoerrelse());
-		//System.out.println("Antallet leger: " + legesystemet.leger.stoerrelse());
-		//System.out.println("Antallet resepter: " + legesystemet.resepter.stoerrelse());
-
 	}
 }

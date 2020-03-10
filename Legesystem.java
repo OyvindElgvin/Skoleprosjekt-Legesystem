@@ -97,7 +97,7 @@ class Legesystem{
                         }
                     } else if (data[3].equals("p")) {
                         try {
-                            resepten = ritkigLege.skrivMilitaerResept(legemiddel, pasient, reit);
+                            resepten = ritkigLege.skrivPResept(legemiddel, pasient);
                         } catch (UlovligUtskrift u) {
                             System.out.println(u.getMessage());
                         }
