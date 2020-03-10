@@ -6,8 +6,8 @@ class Lege implements Comparable<Lege> {
 	protected int ikkeSpesialist;
 
 
-	public Lege(String navnet, int ikkeSpesialist) {
-		navn = navnet;
+	public Lege(String navn, int ikkeSpesialist) {
+		this.navn = navn;
 		this.ikkeSpesialist = ikkeSpesialist;
 		legensReseptListe = new Lenkeliste<Resept>();
 	}

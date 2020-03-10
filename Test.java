@@ -18,7 +18,7 @@ class Test {
 		System.out.println();
 		System.out.println("Pasientlista:");
 		for (int i = 0; i < legesystemet.pasienter.stoerrelse(); i++) {
-			System.out.println(legesystemet.pasienter.hent(i).navn); // henter ut objektet pasient og så navnet
+			System.out.println(legesystemet.pasienter.hent(i).navn + " (fnr "+legesystemet.pasienter.hent(i).foedselsnummer+")");
 		}
 
 		System.out.println();
@@ -45,5 +45,7 @@ class Test {
 			}
 			System.out.println(legesystemet.resepter.hent(i).farge());
 		}
+
+		legesystemet.ordrelokke();
 	}
 }

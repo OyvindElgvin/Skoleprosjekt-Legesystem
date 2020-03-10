@@ -30,16 +30,17 @@ class Legesystem{
             String linje = scanner.nextLine();
             if(linje.startsWith("#")){ //Ny type objekt
                 objekttype++;
-                //System.out.println("\n" + linje); //Tester innlesing
 
             } else {
                 String[] data = linje.trim().split("\\s*,\\s*"); //Må fjerne tomme tegn
+
                 /*
                 for(int i = 0; i < data.length; i++){ //Tester innlesing
                     System.out.print(data[i] + ", ");
                 }
                 System.out.println();
                 */
+
 
                 if(objekttype == 1){ //Pasient
                     Pasient pasient = new Pasient(data[0], data[1]);
@@ -66,13 +67,10 @@ class Legesystem{
                 legemidler.leggTil(legemiddel);
 
                 } else if(objekttype == 3){ //Leger
-                    //System.out.println(data[0]+" "+data[1]);
                     Lege lege = new Lege(data[0], Integer.parseInt(data[1])); // denne funker ikke når data[1] = 0, ganske rart..
                     leger.leggTil(lege);
 
                 } else if(objekttype == 4){ //Resepter
-                    //data[0] = data[0].trim();
-
                     Legemiddel legemiddel = legemidler.hent(Integer.parseInt(data[0]));
                     String legeNavn = data[1];
                     Lege ritkigLege = null;
@@ -81,7 +79,6 @@ class Legesystem{
                             ritkigLege = enLege;
                         }
                     }
-                    //System.out.println(ritkigLege);
                     Pasient pasient = pasienter.hent(Integer.parseInt(data[2]));
                     int reit = 0;
                     Resept resepten = null;
@@ -114,11 +111,12 @@ class Legesystem{
                         }
                     }
                     resepter.leggTil(resepten);
-
                 }
             }
         }
     }
+
+
 
     // kan være det er en del å hente fra trix 3.01 studentsystem-fila
     public void meny(){
@@ -165,4 +163,20 @@ class Legesystem{
     private static void brukEnResept(){}
     private static void skrivUtStatestikk(){}
     private static void skrivDataTilFil(){}
+    protected static void seFullstendigListe(){}
+    protected static void skrivUtEnResept(){}
+
+    protected static void brukEnResept(){
+        skrivUtPasientListe();
+    }
+
+    protected static void skrivUtStatestikk(){}
+    protected static void skrivDataTilFil(){}
+
+    protected static String skrivUtPasientListe() {
+        System.out.println("Hvilken pasient vil du se resepter for?");
+        for (int i = 0; i < legesystemet.pasienter.stoerrelse(); i++) {
+			System.out.println(i +": "+ legesystemet.pasienter.hent(i).navn + " (fnr "+legesystemet.pasienter.hent(i).foedselsnummer+")");
+		}
+    }
 }
