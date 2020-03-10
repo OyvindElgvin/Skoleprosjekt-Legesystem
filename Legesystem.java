@@ -12,10 +12,14 @@ class Legesystem{
     //Metode som leser fra fil og setter objekter inn i listene
     //MANGLER UNNTAK...
     public void lesFil(String filnavn) throws FileNotFoundException{
-        File fil = new File(filnavn);
-        Scanner scanner = new Scanner(fil);
-
-
+        Scanner scanner = null;
+        try{
+            File fil = new File(filnavn);
+            scanner =  new Scanner(fil);
+        } catch(FileNotFoundException e){
+            System.out.println("Fant ikke fil");
+            return;
+        }
 
         int objekttype = 0; //Sier hvilke type objekt som leses
 
@@ -27,7 +31,7 @@ class Legesystem{
                 System.out.println("\n" + linje); //Tester innlesing
 
             } else {
-                String[] data = linje.split(", ");
+                String[] data = linje.trim().split("\\s*,\\s*"); //Må fjerne tomme tegn
                 
                 for(int i = 0; i < data.length; i++){ //Tester innlesing
                     System.out.print(data[i] + ", ");
@@ -63,8 +67,8 @@ class Legesystem{
 
                 } else if(objekttype == 3){ //Leger
                     //System.out.println(data[0]+" "+data[1]);
-                    //Lege lege = new Lege(data[0], Integer.parseInt(data[1])); // denne funker ikke når data[1] = 0, ganske rart..
-                    //leger.leggTil(lege);
+                    Lege lege = new Lege(data[0], Integer.parseInt(data[1])); // denne funker ikke når data[1] = 0, ganske rart..
+                    leger.leggTil(lege);
 
                 } else if(objekttype == 4){ //Resepter
                     Legemiddel legemiddel = legemidler.hent(Integer.parseInt(data[0]));
