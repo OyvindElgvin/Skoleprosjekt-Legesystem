@@ -34,7 +34,7 @@ class Legesystem{
 
             } else {
                 String[] data = linje.trim().split("\\s*,\\s*"); //Må fjerne tomme tegn
-                
+                /*
                 for(int i = 0; i < data.length; i++){ //Tester innlesing
                     System.out.print(data[i] + ", ");
                 }
@@ -154,7 +154,13 @@ class Legesystem{
         }
     }
 
-    private static void seFullstendigListe(){}
+    private static void seFullstendigListe(){
+      System.out.println("--- Liste over leger ---");
+  		for (int i = 0; i < leger.stoerrelse(); i++) {
+  			System.out.println(leger.hent(i).navn);
+  		}
+    }
+
     private static void skrivUtEnResept(){}
     private static void brukEnResept(){}
     private static void skrivUtStatestikk(){}
