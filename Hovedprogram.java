@@ -2,7 +2,7 @@ class Hovedprogram {
 	public static void main(String[] arg) {
 
 		// Oppretter behandlere
-		Lege lege = new Lege("Doktor Jørgen Skavlan");
+		Lege lege = new Lege("Doktor Jørgen Skavlan", 0);
 		Spesialist spesialist = new Spesialist("Spesialist Tanja Kalchenko", 1234);
 
 		//Pasient
@@ -32,7 +32,7 @@ class Hovedprogram {
 	public static void testToString(Lege lege, Spesialist spesialist, Narkotisk narkotisk,
 									Vanedannende vanedannende, Vanedannende vanedannende2,
 									VanligLegemiddel vanligLegemiddel, HvitResept hvitResept,
-									MilitaerResept millaResept,PResept pResept, BlaaResept blaaResept) {
+									MilitaerResept millaResept, PResept pResept, BlaaResept blaaResept) {
 		// Skriver ut relevant informasjon om alle instansene
 		System.out.println();
 		System.out.println("-----------LEGE-----------");

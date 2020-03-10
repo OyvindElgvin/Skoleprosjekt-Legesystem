@@ -4,7 +4,7 @@ class Spesialist extends Lege implements Godkjenningsfritak {
 	protected int spesialistKontrollID;
 
 	public Spesialist(String navnet, int kontrollID) {
-		super(navnet);
+		super(navnet, kontrollID);
 		spesialistKontrollID = kontrollID;
 	}
 
