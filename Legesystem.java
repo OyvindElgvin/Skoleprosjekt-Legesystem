@@ -8,13 +8,13 @@ class Legesystem{
     protected Liste<Legemiddel> legemidler = new Lenkeliste<Legemiddel>();
     protected Liste<Lege> leger = new SortertLenkeliste<Lege>();
     protected Liste<Resept> resepter = new Lenkeliste<Resept>();
+    Scanner scan = new Scanner(System.in);
 
     //Metode som leser fra fil og setter objekter inn i listene
     //MANGLER UNNTAK...
     public void lesFil(String filnavn) throws FileNotFoundException{
         File fil = new File(filnavn);
         Scanner scanner = new Scanner(fil);
-
 
 
         int objekttype = 0; //Sier hvilke type objekt som leses
@@ -98,4 +98,33 @@ class Legesystem{
         System.out.println("5: Skriv alle data til fil."); // frivillig oppgave
         System.out.println("0: Avslutt.");
     }
+
+
+
+    public void ordrelokke(){
+
+        int inputFraBruker = -1;
+
+        while(inputFraBruker != 0){
+            if(inputFraBruker == 1){
+                seFullstendigListe();
+            } else if(inputFraBruker == 2){
+                skrivUtEnResept();
+            } else if(inputFraBruker == 3){
+                brukEnResept();
+            } else if(inputFraBruker == 4){
+                skrivUtStatestikk();
+            } else if(inputFraBruker == 5){
+                //skrivDataTilFil();
+            }
+            meny();
+            inputFraBruker = Integer.parseInt(scan.nextLine());
+        }
+    }
+
+    private static void seFullstendigListe(){}
+    private static void skrivUtEnResept(){}
+    private static void brukEnResept(){}
+    private static void skrivUtStatestikk(){}
+    private static void skrivDataTilFil(){}
 }
