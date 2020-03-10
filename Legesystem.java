@@ -112,6 +112,7 @@ class Legesystem{
 
     // kan være det er en del å hente fra trix 3.01 studentsystem-fila
     public void meny(){
+        System.out.println();
         System.out.println("Hovedmeny:");
         System.out.println("1: Skriv ut fullstendig liste over pasienter, lege, legemidler, og resepter.");
         System.out.println("2: Skriv ut en resept.");
@@ -133,7 +134,7 @@ class Legesystem{
             } else if(inputFraBruker == 2){
                 //skrivUtEnResept();
             } else if(inputFraBruker == 3){
-                //brukEnResept();
+                brukEnResept();
             } else if(inputFraBruker == 4){
                 //skrivUtStatestikk();
             } else if(inputFraBruker == 5){
@@ -145,22 +146,23 @@ class Legesystem{
             inputFraBruker = Integer.parseInt(scan.nextLine());
         }
     }
-    /*
-    protected static void seFullstendigListe(){}
-    protected static void skrivUtEnResept(){}
 
-    protected static void brukEnResept(){
+    //protected static void seFullstendigListe(){}
+    //protected static void skrivUtEnResept(){}
+
+    protected void brukEnResept(){
         skrivUtPasientListe();
     }
 
-    protected static void skrivUtStatestikk(){}
-    protected static void skrivDataTilFil(){}
+    //protected static void skrivUtStatestikk(){}
+    //protected static void skrivDataTilFil(){}
 
-    protected static String skrivUtPasientListe() {
+    protected void skrivUtPasientListe() {
         System.out.println("Hvilken pasient vil du se resepter for?");
-        for (int i = 0; i < legesystemet.pasienter.stoerrelse(); i++) {
-			System.out.println(i +": "+ legesystemet.pasienter.hent(i).navn + " (fnr "+legesystemet.pasienter.hent(i).foedselsnummer+")");
+        for (int i = 0; i < pasienter.stoerrelse(); i++) {
+			System.out.println(i +": "+ pasienter.hent(i).navn + " (fnr "+pasienter.hent(i).foedselsnummer+")");
 		}
+
     }
-    */
+
 }
