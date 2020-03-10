@@ -5,9 +5,9 @@ import java.util.Scanner;
 class Legesystem{
     //Liste som holder på ulike objekter
     protected Liste<Pasient> pasienter = new Lenkeliste<Pasient>();
-    private Liste<Legemiddel> legemidler = new Lenkeliste<Legemiddel>();
-    private Liste<Lege> leger = new SortertLenkeliste<Lege>();
-    private Liste<Resept> resepter = new Lenkeliste<Resept>();
+    protected Liste<Legemiddel> legemidler = new Lenkeliste<Legemiddel>();
+    protected Liste<Lege> leger = new SortertLenkeliste<Lege>();
+    protected Liste<Resept> resepter = new Lenkeliste<Resept>();
 
     //Metode som leser fra fil og setter objekter inn i listene
     //MANGLER UNNTAK...
@@ -22,25 +22,23 @@ class Legesystem{
 
         while(scanner.hasNextLine()){
             String linje = scanner.nextLine();
-            if(linje.startsWith("#")){ //Ny type objekt     
+            if(linje.startsWith("#")){ //Ny type objekt
                 objekttype++;
                 System.out.println("\n" + linje); //Tester innlesing
 
             } else {
                 String[] data = linje.split(", ");
-                
+
                 for(int i = 0; i < data.length; i++){ //Tester innlesing
                     System.out.print(data[i] + ", ");
-                } 
+                }
                 System.out.println();
 
                 if(objekttype == 1){ //Pasient
                     Pasient pasient = new Pasient(data[0], data[1]);
                     pasienter.leggTil(pasient);
-                    //System.out.println(pasient);
 
                 } else if(objekttype == 2){ //Legemidler
-                    //System.out.println(data[0]+" "+data[1]);
                     String navn = data[0];
                     String type = data[1];
                     float pris = Float.parseFloat(data[2]);
