@@ -112,6 +112,7 @@ class Legesystem{
                         }
                     }
                     resepter.leggTil(resepten);
+                    pasient.leggTilResept(resepten);
                 }
             }
         }
