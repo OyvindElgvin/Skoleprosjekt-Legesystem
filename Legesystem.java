@@ -115,7 +115,7 @@ class Legesystem{
                 }
             }
         }
-    }
+    } // ferdig lesFil
 
 
 
@@ -151,9 +151,9 @@ class Legesystem{
         }
     }
 
-    /*
 
-    private static void seFullstendigListe(){
+
+    private void seFullstendigListe(){
       System.out.println("--- Liste over leger ---");
       System.out.println("\n\n");
       System.out.println("--- Liste over pasienter ---");
@@ -183,7 +183,7 @@ class Legesystem{
     private static void skrivUtStatestikk(){}
     private static void skrivDataTilFil(){}
     protected static void skrivUtEnResept(){}
-    */
+
 
     //protected static void seFullstendigListe(){}
     protected void leggTilElement(){
@@ -275,7 +275,8 @@ class Legesystem{
         System.out.println("Valgt pasient: " + pasient);
         System.out.println("Hvilken resept vil du bruke?");
 
-        System.out.println(pasient.hentResepter().hent()); // fortsett her
+        //for (Resept resept : )
+        //System.out.println(pasient.hentResepter().hent()); // fortsett her
         //for (int i = 0; i < resepter.stoerrelse(); i++) {
         //    System.out.println(i +": "+ resepter.hent(i).legemiddelet.navn +" "+ resepter.hent(i).reit); // Lister opp reseptene til pasienten
 		//}
