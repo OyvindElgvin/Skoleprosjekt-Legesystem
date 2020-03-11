@@ -20,7 +20,8 @@ class Lege implements Comparable<Lege> {
 	// Override av toString for å skrive ut relevant info som String
 	@Override
 	public String toString() {
-		return "Lege: "+hentNavn()+"\nType: " + ikkeSpesialist;
+		//return "Lege: "+hentNavn()+"\nType: " + ikkeSpesialist;
+		return navn + " (id " + ikkeSpesialist + ")";
 	}
 
 	// Henter ut reseptlista til legen

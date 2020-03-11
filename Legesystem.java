@@ -234,7 +234,67 @@ class Legesystem{
                 legemidler.leggTil(legemiddel);
                 System.out.println("Legemiddelet er lagt til i systemet.");
             } else if(inputFraBruker == 4){
-                //Legger til resept
+                System.out.println();
+                System.out.println("Hvilke type resept vil du legge til?");
+                System.out.println("1: Hvit");
+                System.out.println("2: Militær");
+                System.out.println("3: P");
+                System.out.println("4: Blå");
+                int type = Integer.parseInt(scan.nextLine());
+
+                System.out.println("\nHvilke legemiddel vil du bruke?");
+                for(int i = 0; i < legemidler.stoerrelse(); i++){
+                    System.out.println((i+1) + ": " + legemidler.hent(i).hentNavn());
+                }
+                int legemiddelIndeks = Integer.parseInt(scan.nextLine()) -1;
+                Legemiddel legemiddel = legemidler.hent(legemiddelIndeks);
+
+                System.out.println("\nHvilken lege skriver ut resepten?");
+                for(int i = 0; i < leger.stoerrelse(); i++){
+                    System.out.println((i+1) + ": " + leger.hent(i));
+                }
+                int legeIndeks = Integer.parseInt(scan.nextLine());
+                Lege lege = leger.hent(legeIndeks -1);
+
+                System.out.println("\nHvilken pasient skrives resepten ut til?");
+                for(int i = 0; i < pasienter.stoerrelse(); i++){
+                    System.out.println((i+1) + ": " + pasienter.hent(i));
+                }
+                int pasientIndeks = Integer.parseInt(scan.nextLine());
+                Pasient pasient = pasienter.hent(pasientIndeks -1);
+
+                System.out.println("\nHva skal reiten være på?");
+                int reit = Integer.parseInt(scan.nextLine());
+
+                Resept resept = null;
+                if (type == 1){
+                    try {
+                        resept = lege.skrivHvitResept(legemiddel, pasient, reit);
+                    } catch (UlovligUtskrift u) {
+                        System.out.println(u.getMessage());
+                    }
+                } else if (type == 2) {
+                    try {
+                        resept = lege.skrivMilitaerResept(legemiddel, pasient, reit);
+                    } catch (UlovligUtskrift u) {
+                        System.out.println(u.getMessage());
+                    }
+                } else if (type == 3) {
+                    try {
+                        resept = lege.skrivPResept(legemiddel, pasient);
+                    } catch (UlovligUtskrift u) {
+                        System.out.println(u.getMessage());
+                    }
+                } else if (type == 4) {
+                    try {
+                        resept = lege.skrivBlaaResept(legemiddel, pasient, reit);
+                    } catch (UlovligUtskrift u) {
+                        System.out.println(u.getMessage());
+                    }
+                }
+                resepter.leggTil(resept);
+                System.out.println("Resepten er lagt til.");
+
             } else if(inputFraBruker == 0){
                 ordrelokke(); //Går tilbake
             } else if (5 < inputFraBruker || inputFraBruker < -1) {
