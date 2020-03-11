@@ -35,14 +35,6 @@ class Legesystem{
             } else {
                 String[] data = linje.trim().split("\\s*,\\s*"); //Må fjerne tomme tegn
 
-                /*
-                for(int i = 0; i < data.length; i++){ //Tester innlesing
-                    System.out.print(data[i] + ", ");
-                }
-                System.out.println();
-                */
-
-
                 if(objekttype == 1){ //Pasient
                     Pasient pasient = new Pasient(data[0], data[1]);
                     pasienter.leggTil(pasient);
@@ -115,14 +107,13 @@ class Legesystem{
                 }
             }
         }
-    } // ferdig lesFil
+    }                       // ferdig lesFil()
 
 
 
 
 
     public void ordrelokke(){
-
         int inputFraBruker = -1;
 
         while(inputFraBruker != 0){
@@ -275,10 +266,16 @@ class Legesystem{
         System.out.println("Valgt pasient: " + pasient);
         System.out.println("Hvilken resept vil du bruke?");
 
-        //for (Resept resept : )
-        //System.out.println(pasient.hentResepter().hent()); // fortsett her
+        Stabel<Resept> reseptstabel = pasient.hentResepter();
+        System.out.println(reseptstabel.stoerrelse());
+
+        for (Resept resept : reseptstabel) {
+            System.out.println("ikke dette?");
+            System.out.println(resept.hentLegemiddel());
+        }
+        //System.out.println(pasient.hentResepter(); // fortsett her
         //for (int i = 0; i < resepter.stoerrelse(); i++) {
-        //    System.out.println(i +": "+ resepter.hent(i).legemiddelet.navn +" "+ resepter.hent(i).reit); // Lister opp reseptene til pasienten
+        //      System.out.println(i +": "+ resepter.hent(i).legemiddelet.navn +" "+ resepter.hent(i).reit); // Lister opp reseptene til pasienten
 		//}
         int inputFraBruker1 = Integer.parseInt(scan.nextLine());
         if (pasienter.stoerrelse() < inputFraBruker1 || inputFraBruker1 < -1) {

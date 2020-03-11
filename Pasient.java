@@ -7,7 +7,7 @@ class Pasient{
     private int id;
 
     //Oppretter en stabel som resepter skal samles i
-    private Stabel<Resept> resepter = new Stabel<Resept>();
+    protected Stabel<Resept> resepter = new Stabel<Resept>();
 
     public Pasient(String navn, String foedselsnummer){
         this.navn = navn;

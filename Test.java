@@ -13,7 +13,7 @@ class Test {
 
 		}
 
-
+		/*
 		System.out.println();
 		System.out.println("---OBJEKTENE I LISTENE---");
 		System.out.println();
@@ -46,7 +46,7 @@ class Test {
 			}
 			System.out.println(legesystemet.resepter.hent(i).farge());
 		}
-
+		*/
 
 		legesystemet.ordrelokke();
 	}
