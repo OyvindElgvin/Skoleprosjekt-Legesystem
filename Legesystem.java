@@ -46,15 +46,15 @@ class Legesystem{
                     float virkestoff = Float.parseFloat(data[3]);
                     Legemiddel legemiddel = null;
 
-                    if(type.equals("a")){ //Narkotisk
+                    if(type.equals("a") || type.equals("narkotisk")){ //Narkotisk
                         int styrke = Integer.parseInt(data[4]);
                         legemiddel = new Narkotisk(navn, pris, virkestoff, styrke);
 
-                    } else if(type.equals("b")) { //Vanedannende
+                    } else if(type.equals("b") || type.equals("vanedannende")) { //Vanedannende
                         int styrke = Integer.parseInt(data[4]);
                         legemiddel= new Vanedannende(navn, pris, virkestoff, styrke);
 
-                    } else if(type.equals("c")){ //Vanlig
+                    } else if(type.equals("c") || type.equals("vanlig")){ //Vanlig
                         legemiddel = new VanligLegemiddel(navn, pris, virkestoff);
                     }
                 legemidler.leggTil(legemiddel);
@@ -331,26 +331,38 @@ class Legesystem{
         }
         Pasient pasient = pasienter.hent(inputFraBruker);
         System.out.println("Valgt pasient: " + pasient);
+
         System.out.println("Hvilken resept vil du bruke?");
-        Stabel<Resept> reseptstabel = pasient.hentResepter(); // Oppretter en stabel med reseptene til pasienten
+        Stabel<Resept> reseptstabel = pasient.hentResepter();   // Oppretter en stabel med reseptene til pasienten
         int index = 0;
-        if (reseptstabel.stoerrelse() == 0) {               // hvis det er 0 resepter
+        if (reseptstabel.stoerrelse() == 0) {                   // hvis det er 0 resepter
             System.out.println("Pasienten har ingen resepter.");
             System.out.println();
             ordrelokke();
         } else {
-            for (Resept resept : reseptstabel) {    // lister opp pasientens reseptene med reit
+            for (Resept resept : reseptstabel) {                // lister opp pasientens reseptene med reit
                 System.out.println(index+": "+resept.legemiddelet.navn +" ("+ resept.reit+" reit)");
                 index ++;
             }
         }
-        int inputFraBruker1 = Integer.parseInt(scan.nextLine());
-        if ((pasient.resepter.stoerrelse()-1) < inputFraBruker1 || inputFraBruker1 < -1) { // hvis utenfor lista
+        int reseptIndex = Integer.parseInt(scan.nextLine());
+        if ((pasient.resepter.stoerrelse()-1) < reseptIndex || reseptIndex < -1) { // hvis utenfor lista
             System.out.println("Feil inntasting! Tallet var utenfor lista.");
+            System.out.println("Trykk en tast for å komme tilbake til hovedmeny");
+            String ventHer = scan.nextLine();
             ordrelokke();
         }else {
-            pasient.resepter.hent(inputFraBruker1).bruk(1);     // bruker en reit på valgt resept
-            System.out.println("Brukte resept på " + resepter.hent(inputFraBruker1).legemiddelet.navn+". Antall gjenvarende reit: "+ pasient.resepter.hent(inputFraBruker1).reit);
+            System.out.println("Hvor mange reit ønsekr du å bruke?");
+            int reitOnske = Integer.parseInt(scan.nextLine());
+            if ((pasient.resepter.hent(reseptIndex).reit - reitOnske) >= 0) {
+                pasient.resepter.hent(reseptIndex).bruk(reitOnske); // bruker ønsket reit på valgt resept
+                System.out.println("Brukte resept på " + pasient.resepter.hent(reseptIndex).legemiddelet.navn+". Antall gjenvarende reit: "+ pasient.resepter.hent(reseptIndex).reit);
+                System.out.println("Trykk en tast for å komme tilbake til hovedmeny");
+                String ventHer = scan.nextLine();
+            } else {
+                System.out.println("Trykk en tast for å komme tilbake til hovedmeny");
+                String ventHer = scan.nextLine();
+            }
         }
     }
 }

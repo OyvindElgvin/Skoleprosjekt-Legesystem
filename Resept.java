@@ -63,8 +63,7 @@ abstract class Resept {
 				teller ++;
 				reit -= 1;
 			}
-			System.out.println("Du får det som var igjen på resepten, altså " +
-								teller + " ganger. \nNå er resepten utløpt.\n");
+			System.out.println("Du får det som var igjen på resepten, altså " + teller + " reit. \nNå er resepten utløpt.\n");
 			return false;
 		}
 	}

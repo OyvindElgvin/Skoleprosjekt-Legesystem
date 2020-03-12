@@ -10,7 +10,7 @@ class Test {
 			legesystemet.lesFil("inndata.txt");
 		}
 		catch (FileNotFoundException e){
-
+			System.out.println(e.getMessage());
 		}
 
 		/*
