@@ -119,7 +119,7 @@ class Legesystem{
 
         while(inputFraBruker != 0){
             if(inputFraBruker == 1){
-                //seFullstendigListe();
+                seFullstendigListe();
             } else if(inputFraBruker == 2){
                 leggTilElement();
             } else if(inputFraBruker == 3){
@@ -147,14 +147,21 @@ class Legesystem{
 
     protected void seFullstendigListe(){
       System.out.println("--- Liste over leger ---");
-      System.out.println("\n\n");
+      skrivUtLegeliste();
+      //System.out.println("\n\n");
       System.out.println("--- Liste over pasienter ---");
       skrivUtPasientliste();
+      System.out.println("--- Liste over legemiddler ---");
+
+      //System.out.println("\n\n");
+      System.out.println("--- Liste over resepter ---");
+      skrivUtReseptliste();
     }
 
     protected void skrivUtLegeliste(){
       for (int i = 0; i < leger.stoerrelse(); i++) {
-  			System.out.println(leger.hent(i).navn);
+  			System.out.print(i+" "+leger.hent(i).navn);
+            System.out.print(", "+leger.hent(i).ikkeSpesialist+"\n");
       }
     }
 
