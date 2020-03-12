@@ -119,7 +119,7 @@ class Legesystem{
 
         while(inputFraBruker != 0){
             if(inputFraBruker == 1){
-                //seFullstendigListe();
+                seFullstendigListe();
             } else if(inputFraBruker == 2){
                 leggTilElement();
             } else if(inputFraBruker == 3){
@@ -147,14 +147,21 @@ class Legesystem{
 
     protected void seFullstendigListe(){
       System.out.println("--- Liste over leger ---");
-      System.out.println("\n\n");
+      skrivUtLegeliste();
+      //System.out.println("\n\n");
       System.out.println("--- Liste over pasienter ---");
       skrivUtPasientliste();
+      System.out.println("--- Liste over legemiddler ---");
+
+      //System.out.println("\n\n");
+      System.out.println("--- Liste over resepter ---");
+      skrivUtReseptliste();
     }
 
     protected void skrivUtLegeliste(){
       for (int i = 0; i < leger.stoerrelse(); i++) {
-  			System.out.println(leger.hent(i).navn);
+  			System.out.print(i+" "+leger.hent(i).navn);
+            System.out.print(", "+leger.hent(i).ikkeSpesialist+"\n");
       }
     }
 
@@ -228,7 +235,7 @@ class Legesystem{
                     }
                 }
 
-                legemiddel = new VanligLegemiddel(legemiddelNavn, pris, virkemiddel);
+                legemiddel = new VanligLegemiddel(legemiddelNavn, pris, virkemiddel); // burde ikke denne være en else if i løkka if(type == 1 || type == 2){
                 legemidler.leggTil(legemiddel);
                 System.out.println("Legemiddelet er lagt til i systemet.");
             } else if(inputFraBruker == 4){
@@ -317,7 +324,7 @@ class Legesystem{
             System.out.println(i +": "+ pasienter.hent(i).toString()); // Lister opp pasientene
 		}
         int inputFraBruker = Integer.parseInt(scan.nextLine());
-        if ((pasienter.stoerrelse()-1) < inputFraBruker || inputFraBruker < -1) {
+        if ((pasienter.stoerrelse()-1) < inputFraBruker || inputFraBruker < -1) { // hvis utenfor lista
             System.out.println("Feil inntasting! Tallet var utenfor lista.");
             System.out.println("Velg et tall fra 0 til " + (pasienter.stoerrelse()-1));
             ordrelokke();
@@ -327,18 +334,18 @@ class Legesystem{
         System.out.println("Hvilken resept vil du bruke?");
         Stabel<Resept> reseptstabel = pasient.hentResepter(); // Oppretter en stabel med reseptene til pasienten
         int index = 0;
-        if (reseptstabel.stoerrelse() == 0) {
+        if (reseptstabel.stoerrelse() == 0) {               // hvis det er 0 resepter
             System.out.println("Pasienten har ingen resepter.");
             System.out.println();
             ordrelokke();
         } else {
-            for (Resept resept : reseptstabel) {    // lister opp reseptene med reit
+            for (Resept resept : reseptstabel) {    // lister opp pasientens reseptene med reit
                 System.out.println(index+": "+resept.legemiddelet.navn +" ("+ resept.reit+" reit)");
                 index ++;
             }
         }
         int inputFraBruker1 = Integer.parseInt(scan.nextLine());
-        if ((pasient.resepter.stoerrelse()-1) < inputFraBruker1 || inputFraBruker1 < -1) {
+        if ((pasient.resepter.stoerrelse()-1) < inputFraBruker1 || inputFraBruker1 < -1) { // hvis utenfor lista
             System.out.println("Feil inntasting! Tallet var utenfor lista.");
             ordrelokke();
         }else {
