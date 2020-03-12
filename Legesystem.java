@@ -352,7 +352,7 @@ class Legesystem{
             String ventHer = scan.nextLine();
             ordrelokke();
         }else {
-            System.out.println("Hvor mange reit ønsekr du å bruke?");
+            System.out.println("Hvor mange reit ønsker du å bruke?");
             int reitOnske = Integer.parseInt(scan.nextLine());
             if ((pasient.resepter.hent(reseptIndex).reit - reitOnske) >= 0) {
                 pasient.resepter.hent(reseptIndex).bruk(reitOnske); // bruker ønsket reit på valgt resept
