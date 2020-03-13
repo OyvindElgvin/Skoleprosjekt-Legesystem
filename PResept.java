@@ -9,7 +9,7 @@ class PResept extends HvitResept {
 	// Henter ut fargen på resepten
 	@Override
 	public String farge() {
-		return "Dette er en pResept";
+		return "p";
 	}
 
 	// Setter ny pris etter avslaget, og gratis hvis avslaget > prisen
