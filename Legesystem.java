@@ -60,10 +60,11 @@ class Legesystem{
                 legemidler.leggTil(legemiddel);
 
                 } else if(objekttype == 3){ //Leger
-                    Lege lege = new Lege(data[0], Integer.parseInt(data[1])); // denne funker ikke når data[1] = 0, ganske rart..
+                    Lege lege = new Lege(data[0], Integer.parseInt(data[1]));
                     leger.leggTil(lege);
 
                 } else if(objekttype == 4){ //Resepter
+                    // (legemiddelNummer, legeNavn, pasientID, typeresept, reit)
                     Legemiddel legemiddel = legemidler.hent(Integer.parseInt(data[0]));
                     String legeNavn = data[1];
                     Lege ritkigLege = null;
@@ -75,30 +76,52 @@ class Legesystem{
                     Pasient pasient = pasienter.hent(Integer.parseInt(data[2]));
                     int reit = 0;
                     Resept resepten = null;
-                    if(data.length == 4){
-                        reit = Integer.parseInt(data[3]);
+                    if(data.length == 4){               // alle untatt P-resept?
+                        // reit = Integer.parseInt(data[3]);
+                        reit = Integer.parseInt(data[4]);
+                        System.out.println("reit: "+ reit);
                     }
                     if (data[3].equals("hvit")){
                         try {
                             resepten = ritkigLege.skrivHvitResept(legemiddel, pasient, reit);
+                            System.out.println("hvit-resept");
+                            System.out.println("reit: "+reit);
+                            if (legemiddel instanceof Narkotisk) {
+                                System.out.println("Narkotisk");
+                            }
                         } catch (UlovligUtskrift u) {
                             System.out.println(u.getMessage());
                         }
                     } else if (data[3].equals("militaer")) {
                         try {
                             resepten = ritkigLege.skrivMilitaerResept(legemiddel, pasient, reit);
+                            System.out.println("militaer-resept");
+                            System.out.println("reit: "+reit);
+                            if (legemiddel instanceof Narkotisk) {
+                                System.out.println("Narkotisk");
+                            }
                         } catch (UlovligUtskrift u) {
                             System.out.println(u.getMessage());
                         }
                     } else if (data[3].equals("p")) {
                         try {
                             resepten = ritkigLege.skrivPResept(legemiddel, pasient);
+                            System.out.println("p-resept");
+                            System.out.println("reit: "+reit);
+                            if (legemiddel instanceof Narkotisk) {
+                                System.out.println("Narkotisk");
+                            }
                         } catch (UlovligUtskrift u) {
                             System.out.println(u.getMessage());
                         }
                     } else if (data[3].equals("blaa")) {
                         try {
                             resepten = ritkigLege.skrivBlaaResept(legemiddel, pasient, reit);
+                            System.out.println("blaa-resept");
+                            System.out.println("reit: "+reit);
+                            if (legemiddel instanceof Narkotisk) {
+                                System.out.println("Narkotisk");
+                            }
                         } catch (UlovligUtskrift u) {
                             System.out.println(u.getMessage());
                         }
@@ -172,7 +195,7 @@ class Legesystem{
     }
     protected void skrivUtReseptliste() {
         for (int i = 0; i < resepter.stoerrelse(); i++) {
-            System.out.println(i +": "+ resepter.hent(i).legemiddelet.navn +" "+ resepter.hent(i).reit);
+            System.out.println(i +": "+ resepter.hent(i).legemiddelet.navn +" "+ resepter.hent(i).hentReit());
 		}
     }
 
@@ -317,6 +340,7 @@ class Legesystem{
     }
 
 
+
     protected void brukEnResept(){
         System.out.println("Hvilken pasient vil du se resepter for?");
         for (int i = 0; i < pasienter.stoerrelse(); i++) {
@@ -365,6 +389,9 @@ class Legesystem{
         }
     }
 
+
+
+
     protected void skrivUtStatestikk() {
         int inputFraBruker = -1;
 
@@ -389,10 +416,49 @@ class Legesystem{
                     }
                 }
                 System.out.println("Det er skrevet ut "+antallNarko+ " narkotiske resepter.");
-                System.out.println("Trykk en tast for å komme tilbake til hovedmeny");
+                System.out.println("Trykk en tast for å komme tilbake til meny for statestikk");
                 String ventHer = scan.nextLine();
             } else if(inputFraBruker == 3){
                 // narkotisk Misbruk
+                System.out.println("Skriv ut statestikk om:");
+                System.out.println("1: Leger");
+                System.out.println("2: Pasienter");
+                int valg = Integer.parseInt(scan.nextLine());
+                if (valg == 1) {
+                    // skriver ut statestikk for leger
+                    System.out.println("(Lege, antall resepter med narkotisk legemiddel)");
+                    for (Lege lege : leger) {       // for hver lege
+                        int antallNarkotiskLege = 0;
+                        Lenkeliste<Resept> enkeltlegesReseptListe = lege.utskrevdeResepter();
+                        for (Resept resept : enkeltlegesReseptListe) { // for hver resept til legen
+                            if (resept.legemiddelet instanceof Narkotisk) {    // hvis narkotisk
+                                antallNarkotiskLege ++;
+                            }
+                        }
+                        System.out.println(lege.navn + ", " + antallNarkotiskLege);
+                    }
+                    System.out.println("Trykk en tast for å gå tilbake");
+                    String ventHer = scan.nextLine();
+                } else if (valg == 2) {
+                    // skriver ut statestikk for pasienter
+                    for (Pasient pasient : pasienter) {
+                        int totaltAntallNarkotiskReit = 0;   // for hver pasient
+                        Stabel<Resept> pasientReseptListe = pasient.hentResepter(); // lager en reseptliste
+                        for (Resept resept : pasientReseptListe) {
+                            int antallNarkotiskReit = 0;
+                            System.out.println(resept.reit);
+                            if (resept.legemiddelet instanceof Narkotisk) {
+                                antallNarkotiskReit += resept.reit;
+                                System.out.println("noen narkotiske?");
+                                System.out.println(resept.reit);
+                            }
+                            totaltAntallNarkotiskReit += antallNarkotiskReit;
+                        }
+                        System.out.println(pasient.navn + ", (" + totaltAntallNarkotiskReit+")");
+                    }
+                }
+
+
             } else if (3 < inputFraBruker || inputFraBruker < -1) {
                 System.out.println("Velg en av de fire alternativene");
             }
@@ -401,7 +467,7 @@ class Legesystem{
             System.out.println("1: Totatlt antall utskrevne resepter på vanedannende legemidler.");
             System.out.println("2: Totatlt antall utskrevne resepter på narkotiske legemidler.");
             System.out.println("3: Narkotisk misbruk.");
-            System.out.println("0: Avslutt.");
+            System.out.println("0: Gå tilbake.");
             inputFraBruker = Integer.parseInt(scan.nextLine());
         }
     }
