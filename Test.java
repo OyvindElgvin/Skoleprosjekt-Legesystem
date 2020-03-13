@@ -7,7 +7,7 @@ class Test {
 		Legesystem legesystemet = new Legesystem();
 
 		try{
-			legesystemet.lesFil("inndata.txt");
+			legesystemet.lesFil("myeInndata.txt");
 		}
 		catch (FileNotFoundException e){
 			System.out.println(e.getMessage());
