@@ -5,7 +5,6 @@ class Test {
 	public static void main(String[] args) throws FileNotFoundException{
 
 		Legesystem legesystemet = new Legesystem();
-
 		try{
 			legesystemet.lesFil("myeInndata.txt");
 		}

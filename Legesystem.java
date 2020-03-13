@@ -182,34 +182,67 @@ class Legesystem{
 
 
     protected void seFullstendigListe(){
-      System.out.println("--- Liste over leger ---");
-      skrivUtLegeliste();
-      //System.out.println("\n\n");
-      System.out.println("--- Liste over pasienter ---");
-      skrivUtPasientliste();
-      System.out.println("--- Liste over legemiddler ---");
+      int inputFraBruker = -1;
 
-      //System.out.println("\n\n");
-      System.out.println("--- Liste over resepter ---");
-      skrivUtReseptliste();
-    }
+      while(inputFraBruker != 0){
+        if(inputFraBruker == 1){
+          System.out.println("--- Liste over leger ---");
+          for (int i = 0; i < leger.stoerrelse(); i++) {
+      			System.out.print(i+" "+leger.hent(i).navn);
+                System.out.print(", "+leger.hent(i).ikkeSpesialist+"\n");}
+          System.out.println("\n\n");
 
-    protected void skrivUtLegeliste(){
-      for (int i = 0; i < leger.stoerrelse(); i++) {
-  			System.out.print(i+" "+leger.hent(i).navn);
-            System.out.print(", "+leger.hent(i).ikkeSpesialist+"\n");
+          System.out.println("--- Liste over pasienter ---");
+          for (int i = 0; i < pasienter.stoerrelse(); i++) {
+              System.out.println(i +": "+ pasienter.hent(i).toString());}
+          System.out.println("\n\n");
+
+          System.out.println("--- Liste over legemiddler ---");
+          for (int i = 0; i < legemidler.stoerrelse(); i++) {
+      				System.out.println(legemidler.hent(i).navn);}
+          System.out.println("\n\n");
+
+          System.out.println("--- Liste over resepter ---");
+          for (int i = 0; i < resepter.stoerrelse(); i++) {
+              System.out.println(i +": "+ resepter.hent(i).legemiddelet.navn +" "+ resepter.hent(i).reit);}
+          System.out.println("\n\n");
+        }
+        else if(inputFraBruker == 2){
+          for (int i = 0; i < leger.stoerrelse(); i++){
+            System.out.println(i+1 + ": " + leger.hent(i).toString() + "\n");
+          }
+        }
+        else if(inputFraBruker == 3){
+          for (int i = 0; i < pasienter.stoerrelse(); i++) {
+              System.out.println(i+1 +": "+ pasienter.hent(i).toString() + "\n");
+          }
+        }
+        else if(inputFraBruker == 4){
+          for (int i = 0; i < legemidler.stoerrelse(); i++){
+            System.out.println(i+1 + ":\n" + legemidler.hent(i).toString() + "\n");
+          }
+        }
+        else if(inputFraBruker == 5){
+          for (int i = 0; i < resepter.stoerrelse(); i++){
+            System.out.println(i+1 + ": " + resepter.hent(i).toString() + "\n");
+          }
+        }
+        else if(inputFraBruker == 6){
+          ordrelokke();
+
+        }
+
+
+        System.out.println("Velg et av alternativene");
+        System.out.println("1: Full oversikt.");
+        System.out.println("2: Info om leger.");
+        System.out.println("3: Info om pasienter.");
+        System.out.println("4: Info om legemidler.");
+        System.out.println("5: Info om resepter.");
+        System.out.println("6: Tilbake.");
+
+        inputFraBruker = Integer.parseInt(scan.nextLine());
       }
-    }
-
-    protected void skrivUtPasientliste() {
-        for (int i = 0; i < pasienter.stoerrelse(); i++) {
-            System.out.println(i +": "+ pasienter.hent(i).toString());
-		}
-    }
-    protected void skrivUtReseptliste() {
-        for (int i = 0; i < resepter.stoerrelse(); i++) {
-            System.out.println(i +": "+ resepter.hent(i).legemiddelet.navn +" "+ resepter.hent(i).hentReit());
-		}
     }
 
 
@@ -217,7 +250,6 @@ class Legesystem{
     protected static void skrivUtEnResept(){}
 
 
-    //protected static void seFullstendigListe(){}
     protected void leggTilElement(){
         int inputFraBruker = -1;
 
@@ -396,6 +428,7 @@ class Legesystem{
                 System.out.println("Trykk en tast for å komme tilbake til hovedmeny");
                 String ventHer = scan.nextLine();
             } else {
+                System.out.println("Det er ikke nok reit på resepten.");
                 System.out.println("Trykk en tast for å komme tilbake til hovedmeny");
                 String ventHer = scan.nextLine();
             }
