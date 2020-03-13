@@ -46,23 +46,30 @@ class Legesystem{
                     // (oaflur,         vanedannende,  622.6469052243087, 277.8892457565651, 5)
                     // (natriumfluorid, kombinasjoner, vanedannende,      1072.3003775441732, 632.2443094094455, 6)
 
-                    // men i data er det et ekstra element på slutten tror jeg.
+                    // men i data er det et ekstra element på slutten tror jeg, kanskje ikke.
 
                     // bare et forslag, det funker ikke så du ser selv hva du vil gjøre
+                    String type = "";
+                    double pris = 0.0;
+                    double virkestoff = 0.0;
 
                     String navn = data[0];
-                    System.out.println("datalengde = "+data.length);
-                    if (data.length == 5){
-                        String type = data[1];
-                        double pris = Double.parseDouble(data[2]);
-                        double virkestoff = Double.parseDouble(data[3]);
-                        System.out.println("Er det noe her?");
-                    } else if (data.length == 6){
-                        String type = data[2];
-                        double pris = Double.parseDouble(data[3]);
-                        double virkestoff = Double.parseDouble(data[4]);
-                    }
+                    // System.out.println("datalengde = "+data.length);
 
+                    // kanskje bruke hasNextDouble eller noe i stedet for, hvis det finnes. 
+                    if (data.length == 4){
+                        type = data[1];
+                        pris = Double.parseDouble(data[2]);
+                        virkestoff = Double.parseDouble(data[3]);
+                    } else if (data.length == 5){
+                        type = data[2];
+                        pris = Double.parseDouble(data[3]);
+                        virkestoff = Double.parseDouble(data[4]);
+                    }
+                    // både pris og virkestoff skal ha 13 desimaler eller noe, så på utskriften er det feil det som bare har en desimal
+
+                    System.out.println(pris);
+                    System.out.println(virkestoff);
                     Legemiddel legemiddel = null;
 
                     if(type.equals("a") || type.equals("narkotisk")){ //Narkotisk
