@@ -125,7 +125,7 @@ class Legesystem{
             } else if(inputFraBruker == 3){
                 brukEnResept();
             } else if(inputFraBruker == 4){
-                //skrivUtStatestikk();
+                skrivUtStatestikk();
             } else if(inputFraBruker == 5){
                 //skrivDataTilFil();
             } else if (6 < inputFraBruker || inputFraBruker < -1) {
@@ -177,7 +177,6 @@ class Legesystem{
     }
 
 
-    protected static void skrivUtStatestikk(){}
     protected static void skrivDataTilFil(){}
     protected static void skrivUtEnResept(){}
 
@@ -363,6 +362,47 @@ class Legesystem{
                 System.out.println("Trykk en tast for å komme tilbake til hovedmeny");
                 String ventHer = scan.nextLine();
             }
+        }
+    }
+
+    protected void skrivUtStatestikk() {
+        int inputFraBruker = -1;
+
+        while(inputFraBruker != 0){
+            if(inputFraBruker == 1){
+                // antall Vanedannende resepter
+                int antallVane = 0;
+                for (Resept r : resepter) {
+                    if (r.legemiddelet instanceof Vanedannende) {
+                        antallVane ++;
+                    }
+                }
+                System.out.println("Det er skrevet ut "+antallVane+ " vanedannende resepter.");
+                System.out.println("Trykk en tast for å komme tilbake til hovedmeny");
+                String ventHer = scan.nextLine();
+            } else if(inputFraBruker == 2){
+                // antall Narkotiske resepter
+                int antallNarko = 0;
+                for (Resept r : resepter) {
+                    if (r.legemiddelet instanceof Narkotisk) {
+                        antallNarko ++;
+                    }
+                }
+                System.out.println("Det er skrevet ut "+antallNarko+ " narkotiske resepter.");
+                System.out.println("Trykk en tast for å komme tilbake til hovedmeny");
+                String ventHer = scan.nextLine();
+            } else if(inputFraBruker == 3){
+                // narkotisk Misbruk
+            } else if (3 < inputFraBruker || inputFraBruker < -1) {
+                System.out.println("Velg en av de fire alternativene");
+            }
+            System.out.println();
+            System.out.println("Skriv ut statestikk om:");
+            System.out.println("1: Totatlt antall utskrevne resepter på vanedannende legemidler.");
+            System.out.println("2: Totatlt antall utskrevne resepter på narkotiske legemidler.");
+            System.out.println("3: Narkotisk misbruk.");
+            System.out.println("0: Avslutt.");
+            inputFraBruker = Integer.parseInt(scan.nextLine());
         }
     }
 }
