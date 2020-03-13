@@ -40,18 +40,37 @@ class Legesystem{
                     pasienter.leggTil(pasient);
 
                 } else if(objekttype == 2){ //Legemidler
+
+                    // to eksempler fra myeinndata.txt:
+
+                    // (oaflur,         vanedannende,  622.6469052243087, 277.8892457565651, 5)
+                    // (natriumfluorid, kombinasjoner, vanedannende,      1072.3003775441732, 632.2443094094455, 6)
+
+                    // men i data er det et ekstra element på slutten tror jeg.
+
+                    // bare et forslag, det funker ikke så du ser selv hva du vil gjøre
+
                     String navn = data[0];
-                    String type = data[1];
-                    float pris = Float.parseFloat(data[2]);
-                    float virkestoff = Float.parseFloat(data[3]);
+                    System.out.println("datalengde = "+data.length);
+                    if (data.length == 5){
+                        String type = data[1];
+                        double pris = Double.parseDouble(data[2]);
+                        double virkestoff = Double.parseDouble(data[3]);
+                        System.out.println("Er det noe her?");
+                    } else if (data.length == 6){
+                        String type = data[2];
+                        double pris = Double.parseDouble(data[3]);
+                        double virkestoff = Double.parseDouble(data[4]);
+                    }
+
                     Legemiddel legemiddel = null;
 
                     if(type.equals("a") || type.equals("narkotisk")){ //Narkotisk
-                        int styrke = Integer.parseInt(data[4]);
+                        int styrke = Integer.parseInt(data[data.length -1]);
                         legemiddel = new Narkotisk(navn, pris, virkestoff, styrke);
 
                     } else if(type.equals("b") || type.equals("vanedannende")) { //Vanedannende
-                        int styrke = Integer.parseInt(data[4]);
+                        int styrke = Integer.parseInt(data[data.length -1]);
                         legemiddel= new Vanedannende(navn, pris, virkestoff, styrke);
 
                     } else if(type.equals("c") || type.equals("vanlig")){ //Vanlig
@@ -60,10 +79,11 @@ class Legesystem{
                 legemidler.leggTil(legemiddel);
 
                 } else if(objekttype == 3){ //Leger
-                    Lege lege = new Lege(data[0], Integer.parseInt(data[1])); // denne funker ikke når data[1] = 0, ganske rart..
+                    Lege lege = new Lege(data[0], Integer.parseInt(data[1]));
                     leger.leggTil(lege);
 
                 } else if(objekttype == 4){ //Resepter
+                    // (legemiddelNummer, legeNavn, pasientID, typeresept, reit)
                     Legemiddel legemiddel = legemidler.hent(Integer.parseInt(data[0]));
                     String legeNavn = data[1];
                     Lege ritkigLege = null;
@@ -75,8 +95,19 @@ class Legesystem{
                     Pasient pasient = pasienter.hent(Integer.parseInt(data[2]));
                     int reit = 0;
                     Resept resepten = null;
-                    if(data.length == 4){
-                        reit = Integer.parseInt(data[3]);
+                    System.out.println("Antall elementer i data: " + data.length);
+                    for (int i = 0; i < data.length; i++) {
+                        System.out.print(data[i]+ ", ");
+                    }
+                    // printer dette:
+                    // Antall elementer i data: 5
+                    // 1, Dr. Cox, 2, hvit, 7,              er vel noe etter det komma der.. men asså samma det?
+                    System.out.println();
+                    System.out.println();
+        //          if(data.length == 4){
+                    if(data.length == 5){
+                        // reit = Integer.parseInt(data[3]);
+                        reit = Integer.parseInt(data[4]);
                     }
                     if (data[3].equals("hvit")){
                         try {
@@ -109,8 +140,6 @@ class Legesystem{
             }
         }
     }                       // ferdig lesFil()
-
-
 
 
 
@@ -349,6 +378,7 @@ class Legesystem{
     }
 
 
+
     protected void brukEnResept(){
         System.out.println("Hvilken pasient vil du se resepter for?");
         for (int i = 0; i < pasienter.stoerrelse(); i++) {
@@ -398,6 +428,9 @@ class Legesystem{
         }
     }
 
+
+
+
     protected void skrivUtStatestikk() {
         int inputFraBruker = -1;
 
@@ -422,10 +455,49 @@ class Legesystem{
                     }
                 }
                 System.out.println("Det er skrevet ut "+antallNarko+ " narkotiske resepter.");
-                System.out.println("Trykk en tast for å komme tilbake til hovedmeny");
+                System.out.println("Trykk en tast for å komme tilbake til meny for statestikk");
                 String ventHer = scan.nextLine();
             } else if(inputFraBruker == 3){
                 // narkotisk Misbruk
+                System.out.println("Skriv ut statestikk om:");
+                System.out.println("1: Leger");
+                System.out.println("2: Pasienter");
+                int valg = Integer.parseInt(scan.nextLine());
+                if (valg == 1) {
+                    // skriver ut statestikk for leger
+                    System.out.println("# (Lege, antall resepter med narkotisk legemiddel)");
+                    for (Lege lege : leger) {       // for hver lege
+                        int antallNarkotiskLege = 0;
+                        Lenkeliste<Resept> enkeltlegesReseptListe = lege.utskrevdeResepter();
+                        for (Resept resept : enkeltlegesReseptListe) { // for hver resept til legen
+                            if (resept.legemiddelet instanceof Narkotisk) {    // hvis narkotisk
+                                antallNarkotiskLege ++;
+                            }
+                        }
+                        System.out.println(lege.navn + ", " + antallNarkotiskLege);
+                    }
+                    System.out.println("Trykk en tast for å gå tilbake");
+                    String ventHer = scan.nextLine();
+                } else if (valg == 2) {
+                    // skriver ut statestikk for pasienter
+                    System.out.println("# (Pasient, antall reit på narkotiske legemidler)");
+                    for (Pasient pasient : pasienter) {
+                        int totaltAntallNarkotiskReit = 0;   // for hver pasient
+                        Stabel<Resept> pasientReseptListe = pasient.hentResepter(); // lager en reseptliste
+                        boolean narko = false;
+                        for (Resept resept : pasientReseptListe) { // for hver resept
+                            int antallNarkotiskReit = 0;
+                            if (resept.legemiddelet instanceof Narkotisk) {
+                                antallNarkotiskReit += resept.reit;
+                                narko = true;
+                            }
+                            totaltAntallNarkotiskReit += antallNarkotiskReit;
+                        }
+                        if (narko) {
+                            System.out.println(pasient.navn + ", (" + totaltAntallNarkotiskReit + " reit)");
+                        }
+                    }
+                }
             } else if (3 < inputFraBruker || inputFraBruker < -1) {
                 System.out.println("Velg en av de fire alternativene");
             }
@@ -434,7 +506,7 @@ class Legesystem{
             System.out.println("1: Totatlt antall utskrevne resepter på vanedannende legemidler.");
             System.out.println("2: Totatlt antall utskrevne resepter på narkotiske legemidler.");
             System.out.println("3: Narkotisk misbruk.");
-            System.out.println("0: Avslutt.");
+            System.out.println("0: Gå tilbake.");
             inputFraBruker = Integer.parseInt(scan.nextLine());
         }
     }
