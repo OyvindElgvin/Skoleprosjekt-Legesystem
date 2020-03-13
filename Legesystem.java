@@ -56,7 +56,7 @@ class Legesystem{
                     String navn = data[0];
                     // System.out.println("datalengde = "+data.length);
 
-                    // kanskje bruke hasNextDouble eller noe i stedet for, hvis det finnes. 
+                    // kanskje bruke hasNextDouble eller noe i stedet for, hvis det finnes.
                     if (data.length == 4){
                         type = data[1];
                         pris = Double.parseDouble(data[2]);
@@ -91,7 +91,7 @@ class Legesystem{
 
                 } else if(objekttype == 4){ //Resepter
                     // (legemiddelNummer, legeNavn, pasientID, typeresept, reit)
-                    Legemiddel legemiddel = legemidler.hent(Integer.parseInt(data[0]));
+                    Legemiddel legemiddel = legemidler.hent(Integer.parseInt(data[0])); // burde sjekke om legemiddelet eksisterer
                     String legeNavn = data[1];
                     Lege ritkigLege = null;
                     for(Lege enLege : leger){
