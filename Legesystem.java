@@ -91,6 +91,11 @@ class Legesystem{
 
                 } else if(objekttype == 4){ //Resepter
                     // (legemiddelNummer, legeNavn, pasientID, typeresept, reit)
+
+                    if (Integer.parseInt(data[0]) < 0 || (legemidler.stoerrelse()-1) < Integer.parseInt(data[0])){ // hvis data[0] er uten legemidler
+                        throw new UgyldigListeIndeks(Integer.parseInt(data[0])); //funker dette? 
+                    }
+
                     Legemiddel legemiddel = legemidler.hent(Integer.parseInt(data[0])); // burde sjekke om legemiddelet eksisterer
                     String legeNavn = data[1];
                     Lege ritkigLege = null;
@@ -116,6 +121,9 @@ class Legesystem{
                         // reit = Integer.parseInt(data[3]);
                         reit = Integer.parseInt(data[4]);
                     }
+
+                    System.out.println("Problemer med pasient "+data[0]+", "+data[1]);
+
                     if (data[3].equals("hvit")){
                         try {
                             resepten = ritkigLege.skrivHvitResept(legemiddel, pasient, reit);
