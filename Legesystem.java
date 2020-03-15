@@ -486,39 +486,41 @@ class Legesystem{
                     // skriver ut statestikk for leger
                     System.out.println("# (Lege, antall resepter med narkotisk legemiddel)");
                     for (Lege lege : leger) {       // for hver lege
-                        int antallNarkotiskLege = 0;
-                        Lenkeliste<Resept> enkeltlegesReseptListe = lege.utskrevdeResepter();
+                        int antallNarkotiskResept = 0;
+                        Lenkeliste<Resept> enkeltlegesReseptListe = lege.utskrevdeResepter(); // Oppretter lenkeliste med reseptene til legen
                         for (Resept resept : enkeltlegesReseptListe) { // for hver resept til legen
                             if (resept.legemiddelet instanceof Narkotisk) {    // hvis narkotisk
-                                antallNarkotiskLege ++;
+                                antallNarkotiskResept ++;
                             }
                         }
-                        System.out.println(lege.navn + ", " + antallNarkotiskLege);
+                        System.out.println(lege.navn + ", " + antallNarkotiskResept);
                     }
                     System.out.println("Trykk en tast for å gå tilbake");
                     String ventHer = scan.nextLine();
                 } else if (valg == 2) {
                     // skriver ut statestikk for pasienter
                     System.out.println("# (Pasient, antall reit på narkotiske legemidler)");
-                    for (Pasient pasient : pasienter) {
-                        int totaltAntallNarkotiskReit = 0;   // for hver pasient
+                    for (Pasient pasient : pasienter) {             // for hver pasient
+                        int totaltAntallNarkotiskReit = 0;
                         Stabel<Resept> pasientReseptListe = pasient.hentResepter(); // lager en reseptliste
                         boolean narko = false;
-                        for (Resept resept : pasientReseptListe) { // for hver resept
+                        for (Resept resept : pasientReseptListe) {  // for hver resept
                             int antallNarkotiskReit = 0;
                             if (resept.legemiddelet instanceof Narkotisk) {
                                 antallNarkotiskReit += resept.reit;
-                                narko = true;
+                                narko = true;                       // Hvis pasienten her noen narkotiske resepter
                             }
                             totaltAntallNarkotiskReit += antallNarkotiskReit;
                         }
-                        if (narko) {
+                        if (narko) {                                // så skrives de ut
                             System.out.println(pasient.navn + ", (" + totaltAntallNarkotiskReit + " reit)");
                         }
                     }
                 }
             } else if (3 < inputFraBruker || inputFraBruker < -1) {
                 System.out.println("Velg en av de fire alternativene");
+                System.out.println("Trykk en tast for å komme tilbake til meny for statestikk");
+                String ventHer = scan.nextLine();
             }
             System.out.println();
             System.out.println("Skriv ut statestikk om:");
