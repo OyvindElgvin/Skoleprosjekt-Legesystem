@@ -15,12 +15,12 @@ class Narkotisk extends Legemiddel {
 		return styrke;
 	}
 
-	
+
 
 	// Override av toString for å skrive ut relevant info som String
 	@Override
 	public String toString() {
-		return "LegemiddelID: "+hentId()+"\nNavn: "+hentNavn()+"\nOriginalpris: "+hentPris()+" kr"+
+		return "LegemiddelID: "+hentId()+"\nNavn: "+hentNavn()+"\nType legemiddel: Narkotisk \nOriginalpris: "+hentPris()+" kr"+
 				"\nVirkestoff: "+hentVirkestoff()+" mg\nStyrke: "+hentNarkotiskStyrke();
 	}
 }
