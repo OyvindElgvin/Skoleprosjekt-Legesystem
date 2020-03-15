@@ -410,12 +410,12 @@ class Legesystem{
 
         System.out.println("Hvilken resept vil du bruke?");
         Stabel<Resept> reseptstabel = pasient.hentResepter();   // Oppretter en stabel med reseptene til pasienten
-        int index = 0;
         if (reseptstabel.stoerrelse() == 0) {                   // hvis det er 0 resepter
             System.out.println("Pasienten har ingen resepter.");
             System.out.println();
             ordrelokke();
         } else {
+            int index = 0;
             for (Resept resept : reseptstabel) {                // lister opp pasientens reseptene med reit
                 System.out.println(index+": "+resept.legemiddelet.navn +" ("+ resept.reit+" reit)");
                 index ++;
