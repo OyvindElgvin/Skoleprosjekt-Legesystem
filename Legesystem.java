@@ -45,12 +45,13 @@ class Legesystem{
                         leggTilLegemiddelliste(data[0],data[1],data[2], data[3],  "vanlig");
                     } else if(data.length == 5){
                         leggTilLegemiddelliste(data[0], data[1], data[2], data[3], data[4]);
-                    } 
+                    }
 
                 } else if(objekttype == 3 && data.length == 2){ //Leger
                     leggTilLegeliste(data[0], data[1]);
 
                 } else if(objekttype == 4 && data.length == 5){ //Resepter
+                    System.out.println(data[0]+", "+data[1]+", "+data[2]+", "+data[3]+", "+data[4]);
                     leggTilReseptliste(data[0], data[1], data[2], data[3], data[4]);
                 }
             }
@@ -450,7 +451,7 @@ class Legesystem{
         legemidler.leggTil(legemiddel);
     }
     protected void leggTilReseptliste(String legemiddelNummer, String legeNavn, String pasientId, String typeresept, String reit){
-        if(Integer.parseInt(legemiddelNummer) > legemidler.stoerrelse() || Integer.parseInt(pasientId) > pasienter.stoerrelse()){
+        if(Integer.parseInt(legemiddelNummer) > (legemidler.stoerrelse()-1) || Integer.parseInt(pasientId) > (pasienter.stoerrelse()-1)){
             return;
         }
         Legemiddel legemiddel = legemidler.hent(Integer.parseInt(legemiddelNummer));
