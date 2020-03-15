@@ -25,6 +25,7 @@ class Legesystem{
         }
 
         int objekttype = 0; //Sier hvilke type objekt som leses
+        int legemiddelindex = 91; // bare la inn denne så ser vi enkelt hvilet legemiddel det er snakk om
 
 
         while(scanner.hasNextLine()){
@@ -41,12 +42,7 @@ class Legesystem{
 
                 } else if(objekttype == 2){ //Legemidler
 
-                    // to eksempler fra myeinndata.txt:
-
-                    // (oaflur,         vanedannende,  622.6469052243087, 277.8892457565651, 5)
-                    // (natriumfluorid, kombinasjoner, vanedannende,      1072.3003775441732, 632.2443094094455, 6)
-
-                    // men i data er det et ekstra element på slutten tror jeg, kanskje ikke.
+                    // bare prøvde å finne ut hva som blir lest inn
 
                     // bare et forslag, det funker ikke så du ser selv hva du vil gjøre
                     String type = "";
@@ -54,22 +50,30 @@ class Legesystem{
                     double virkestoff = 0.0;
 
                     String navn = data[0];
-                    // System.out.println("datalengde = "+data.length);
+
+                    System.out.println("datalengde = "+data.length);
 
                     // kanskje bruke hasNextDouble eller noe i stedet for, hvis det finnes.
                     if (data.length == 4){
                         type = data[1];
                         pris = Double.parseDouble(data[2]);
                         virkestoff = Double.parseDouble(data[3]);
+                        legemiddelindex ++;
                     } else if (data.length == 5){
+                        type = data[1];
+                        pris = Double.parseDouble(data[2]);
+                        virkestoff = Double.parseDouble(data[3]);
+                        legemiddelindex ++;
+                    } else if (data.length == 6){
                         type = data[2];
                         pris = Double.parseDouble(data[3]);
                         virkestoff = Double.parseDouble(data[4]);
+                        legemiddelindex ++;
                     }
-                    // både pris og virkestoff skal ha 13 desimaler eller noe, så på utskriften er det feil det som bare har en desimal
 
-                    System.out.println(pris);
-                    System.out.println(virkestoff);
+
+                    System.out.println(legemiddelindex+": "+navn+", Pris: "+pris+", Virkestoff: "+virkestoff+", type: "+type);
+
                     Legemiddel legemiddel = null;
 
                     if(type.equals("a") || type.equals("narkotisk")){ //Narkotisk
@@ -93,7 +97,7 @@ class Legesystem{
                     // (legemiddelNummer, legeNavn, pasientID, typeresept, reit)
 
                     if (Integer.parseInt(data[0]) < 0 || (legemidler.stoerrelse()-1) < Integer.parseInt(data[0])){ // hvis data[0] er uten legemidler
-                        throw new UgyldigListeIndeks(Integer.parseInt(data[0])); //funker dette? 
+                        throw new UgyldigListeIndeks(Integer.parseInt(data[0])); //funker dette?
                     }
 
                     Legemiddel legemiddel = legemidler.hent(Integer.parseInt(data[0])); // burde sjekke om legemiddelet eksisterer
