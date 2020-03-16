@@ -179,7 +179,7 @@ class Legesystem{
                 String legeNavn = scan.nextLine();
 
                 System.out.println("Hva er kontrollID til legen? (0 hvis ingen)");
-                int kontrollId = scan.nextLine();
+                String kontrollId = scan.nextLine();
 
                 leggTilLegeliste(legeNavn, kontrollId);
                 System.out.println("Legen er lagt til i systemet.");
@@ -193,7 +193,7 @@ class Legesystem{
 
                 String styrke = "vanlig";
                 if(type == "1" || type == "2"){
-                    System.out.println("Hva er styrken på legemiddelet?")
+                    System.out.println("Hva er styrken på legemiddelet?");
                     styrke = scan.nextLine();
                 }
 
@@ -203,8 +203,8 @@ class Legesystem{
                 System.out.println("Hva er prisen på legemiddelet?");
                 String pris = scan.nextLine();
 
-                System.out.println("Hvor mye virkemiddel?");
-                String virkemiddel = scan.nextLine();
+                System.out.println("Hvor mye virkestoff?");
+                String virkestoff = scan.nextLine();
 
                 leggTilLegemiddelliste(legemiddelNavn, type, pris, virkestoff, styrke);
                 System.out.println("Legemiddelet er lagt til i systemet.");
@@ -215,59 +215,31 @@ class Legesystem{
                 System.out.println("2: Militær");
                 System.out.println("3: P");
                 System.out.println("4: Blå");
-                int type = Integer.parseInt(scan.nextLine());
+                String type = scan.nextLine();
 
                 System.out.println("\nHvilke legemiddel vil du bruke?");
                 for(int i = 0; i < legemidler.stoerrelse(); i++){
                     System.out.println((i+1) + ": " + legemidler.hent(i).hentNavn());
                 }
-                int legemiddelIndeks = Integer.parseInt(scan.nextLine()) -1;
-                Legemiddel legemiddel = legemidler.hent(legemiddelIndeks);
+                String legemiddelIndeks = scan.nextLine();
 
                 System.out.println("\nHvilken lege skriver ut resepten?");
                 for(int i = 0; i < leger.stoerrelse(); i++){
                     System.out.println((i+1) + ": " + leger.hent(i));
                 }
                 int legeIndeks = Integer.parseInt(scan.nextLine());
-                Lege lege = leger.hent(legeIndeks -1);
+                String legeNavn = leger.hent(legeIndeks).hentNavn();
 
                 System.out.println("\nHvilken pasient skrives resepten ut til?");
                 for(int i = 0; i < pasienter.stoerrelse(); i++){
                     System.out.println((i+1) + ": " + pasienter.hent(i));
                 }
-                int pasientIndeks = Integer.parseInt(scan.nextLine());
-                Pasient pasient = pasienter.hent(pasientIndeks -1);
+                String pasientIndeks = scan.nextLine();
 
                 System.out.println("\nHva skal reiten være på?");
-                int reit = Integer.parseInt(scan.nextLine());
+                String reit = scan.nextLine();
 
-                Resept resept = null;
-                if (type == 1){
-                    try {
-                        resept = lege.skrivHvitResept(legemiddel, pasient, reit);
-                    } catch (UlovligUtskrift u) {
-                        System.out.println(u.getMessage());
-                    }
-                } else if (type == 2) {
-                    try {
-                        resept = lege.skrivMilitaerResept(legemiddel, pasient, reit);
-                    } catch (UlovligUtskrift u) {
-                        System.out.println(u.getMessage());
-                    }
-                } else if (type == 3) {
-                    try {
-                        resept = lege.skrivPResept(legemiddel, pasient);
-                    } catch (UlovligUtskrift u) {
-                        System.out.println(u.getMessage());
-                    }
-                } else if (type == 4) {
-                    try {
-                        resept = lege.skrivBlaaResept(legemiddel, pasient, reit);
-                    } catch (UlovligUtskrift u) {
-                        System.out.println(u.getMessage());
-                    }
-                }
-                resepter.leggTil(resept);
+                leggTilReseptliste(legemiddelIndeks, legeNavn, pasientIndeks, type, reit);
                 System.out.println("Resepten er lagt til.");
 
             } else if(inputFraBruker == 0){
@@ -336,7 +308,6 @@ class Legesystem{
             }
         }
     }
-
 
     protected void skrivUtStatestikk() {
         int inputFraBruker = -1;
@@ -458,25 +429,25 @@ class Legesystem{
         }
         Pasient pasient = pasienter.hent(Integer.parseInt(pasientId));
         Resept resepten = null;
-        if (typeresept.equals("hvit")){
+        if (typeresept.equals("hvit") || typeresept.equals("1")){
             try {
                 resepten = ritkigLege.skrivHvitResept(legemiddel, pasient, Integer.parseInt(reit));
             } catch (UlovligUtskrift u) {
                 System.out.println(u.getMessage());
             }
-        } else if (typeresept.equals("militaer")) {
+        } else if (typeresept.equals("militaer") || typeresept.equals("2")) {
             try {
                 resepten = ritkigLege.skrivMilitaerResept(legemiddel, pasient, Integer.parseInt(reit));
             } catch (UlovligUtskrift u) {
                 System.out.println(u.getMessage());
             }
-        } else if (typeresept.equals("p")) {
+        } else if (typeresept.equals("p") || typeresept.equals("3")) {
             try {
                 resepten = ritkigLege.skrivPResept(legemiddel, pasient);
             } catch (UlovligUtskrift u) {
                 System.out.println(u.getMessage());
             }
-        } else if (typeresept.equals("blaa")) {
+        } else if (typeresept.equals("blaa") || typeresept.equals("4")) {
             try {
                 resepten = ritkigLege.skrivBlaaResept(legemiddel, pasient, Integer.parseInt(reit));
             } catch (UlovligUtskrift u) {
