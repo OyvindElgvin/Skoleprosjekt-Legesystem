@@ -88,7 +88,23 @@ class Legesystem{
             inputFraBruker = Integer.parseInt(scan.nextLine());
         }
     }
-
+    protected void seLegeliste(){
+      for (int i = 0; i < leger.stoerrelse(); i++) {
+        System.out.print(i+" "+leger.hent(i).navn);
+        System.out.print(", "+leger.hent(i).ikkeSpesialist+"\n");}
+    }
+    protected void sePasientListe(){
+      for (int i = 0; i < pasienter.stoerrelse(); i++) {
+          System.out.println(i +": "+ pasienter.hent(i).toString());}
+    }
+    protected void seLegemiddelListe(){
+      for (int i = 0; i < legemidler.stoerrelse(); i++) {
+        System.out.println(legemidler.hent(i).navn);}
+    }
+    protected void seReseptListe(){
+      for (int i = 0; i < resepter.stoerrelse(); i++) {
+        System.out.println(i +": "+ resepter.hent(i).legemiddelet.navn +" "+ resepter.hent(i).reit);}
+    }
 
     protected void seFullstendigListe(){
       int inputFraBruker = -1;
@@ -96,24 +112,19 @@ class Legesystem{
       while(inputFraBruker != 0){
         if(inputFraBruker == 1){
           System.out.println("--- Liste over leger ---");
-          for (int i = 0; i < leger.stoerrelse(); i++) {
-      			System.out.print(i+" "+leger.hent(i).navn);
-                System.out.print(", "+leger.hent(i).ikkeSpesialist+"\n");}
+          seLegeliste();
           System.out.println("\n\n");
 
           System.out.println("--- Liste over pasienter ---");
-          for (int i = 0; i < pasienter.stoerrelse(); i++) {
-              System.out.println(i +": "+ pasienter.hent(i).toString());}
+          sePasientListe();
           System.out.println("\n\n");
 
           System.out.println("--- Liste over legemiddler ---");
-          for (int i = 0; i < legemidler.stoerrelse(); i++) {
-      				System.out.println(legemidler.hent(i).navn);}
+          seLegemiddelListe();
           System.out.println("\n\n");
 
           System.out.println("--- Liste over resepter ---");
-          for (int i = 0; i < resepter.stoerrelse(); i++) {
-              System.out.println(i +": "+ resepter.hent(i).legemiddelet.navn +" "+ resepter.hent(i).reit);}
+          seReseptListe();
           System.out.println("\n\n");
         }
         else if(inputFraBruker == 2){
