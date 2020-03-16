@@ -25,10 +25,11 @@ class Legesystem{
         }
 
         int objekttype = 0; //Sier hvilke type objekt som leses
-        int legemiddelindex = 91; // bare la inn denne så ser vi enkelt hvilet legemiddel det er snakk om
-
+        int index = 0; // bare la inn denne så ser vi enkelt hvilet linje det er snakk om
 
         while(scanner.hasNextLine()){
+            index++;
+            System.out.println(index);
             String linje = scanner.nextLine();
             if(linje.startsWith("#")){ //Ny type objekt
                 objekttype++;
@@ -36,125 +37,22 @@ class Legesystem{
             } else {
                 String[] data = linje.trim().split("\\s*,\\s*"); //Må fjerne tomme tegn
 
-                if(objekttype == 1){ //Pasient
-                    Pasient pasient = new Pasient(data[0], data[1]);
-                    pasienter.leggTil(pasient);
+                if(objekttype == 1 && data.length == 2){ //Pasient
+                    leggTilPasientliste(data[0], data[1]);
 
                 } else if(objekttype == 2){ //Legemidler
-
-                    // bare prøvde å finne ut hva som blir lest inn
-
-                    // bare et forslag, det funker ikke så du ser selv hva du vil gjøre
-                    String type = "";
-                    double pris = 0.0;
-                    double virkestoff = 0.0;
-
-                    String navn = data[0];
-
-                    System.out.println("datalengde = "+data.length);
-
-                    // kanskje bruke hasNextDouble eller noe i stedet for, hvis det finnes.
-                    if (data.length == 4){
-                        type = data[1];
-                        pris = Double.parseDouble(data[2]);
-                        virkestoff = Double.parseDouble(data[3]);
-                        legemiddelindex ++;
-                    } else if (data.length == 5){
-                        type = data[1];
-                        pris = Double.parseDouble(data[2]);
-                        virkestoff = Double.parseDouble(data[3]);
-                        legemiddelindex ++;
-                    } else if (data.length == 6){
-                        type = data[2];
-                        pris = Double.parseDouble(data[3]);
-                        virkestoff = Double.parseDouble(data[4]);
-                        legemiddelindex ++;
+                    if(data.length == 4){
+                        leggTilLegemiddelliste(data[0],data[1],data[2], data[3],  "vanlig");
+                    } else if(data.length == 5){
+                        leggTilLegemiddelliste(data[0], data[1], data[2], data[3], data[4]);
                     }
 
+                } else if(objekttype == 3 && data.length == 2){ //Leger
+                    leggTilLegeliste(data[0], data[1]);
 
-                    System.out.println(legemiddelindex+": "+navn+", Pris: "+pris+", Virkestoff: "+virkestoff+", type: "+type);
-
-                    Legemiddel legemiddel = null;
-
-                    if(type.equals("a") || type.equals("narkotisk")){ //Narkotisk
-                        int styrke = Integer.parseInt(data[data.length -1]);
-                        legemiddel = new Narkotisk(navn, pris, virkestoff, styrke);
-
-                    } else if(type.equals("b") || type.equals("vanedannende")) { //Vanedannende
-                        int styrke = Integer.parseInt(data[data.length -1]);
-                        legemiddel= new Vanedannende(navn, pris, virkestoff, styrke);
-
-                    } else if(type.equals("c") || type.equals("vanlig")){ //Vanlig
-                        legemiddel = new VanligLegemiddel(navn, pris, virkestoff);
-                    }
-                legemidler.leggTil(legemiddel);
-
-                } else if(objekttype == 3){ //Leger
-                    Lege lege = new Lege(data[0], Integer.parseInt(data[1]));
-                    leger.leggTil(lege);
-
-                } else if(objekttype == 4){ //Resepter
-                    // (legemiddelNummer, legeNavn, pasientID, typeresept, reit)
-
-                    if (Integer.parseInt(data[0]) < 0 || (legemidler.stoerrelse()-1) < Integer.parseInt(data[0])){ // hvis data[0] er uten legemidler
-                        throw new UgyldigListeIndeks(Integer.parseInt(data[0])); //funker dette?
-                    }
-
-                    Legemiddel legemiddel = legemidler.hent(Integer.parseInt(data[0])); // burde sjekke om legemiddelet eksisterer
-                    String legeNavn = data[1];
-                    Lege ritkigLege = null;
-                    for(Lege enLege : leger){
-                        if(legeNavn.equals(enLege.hentNavn())){
-                            ritkigLege = enLege;
-                        }
-                    }
-                    Pasient pasient = pasienter.hent(Integer.parseInt(data[2]));
-                    int reit = 0;
-                    Resept resepten = null;
-                    System.out.println("Antall elementer i data: " + data.length);
-                    for (int i = 0; i < data.length; i++) {
-                        System.out.print(data[i]+ ", ");
-                    }
-                    // printer dette:
-                    // Antall elementer i data: 5
-                    // 1, Dr. Cox, 2, hvit, 7,              er vel noe etter det komma der.. men asså samma det?
-                    System.out.println();
-                    System.out.println();
-        //          if(data.length == 4){
-                    if(data.length == 5){
-                        // reit = Integer.parseInt(data[3]);
-                        reit = Integer.parseInt(data[4]);
-                    }
-
-                    System.out.println("Problemer med pasient "+data[0]+", "+data[1]);
-
-                    if (data[3].equals("hvit")){
-                        try {
-                            resepten = ritkigLege.skrivHvitResept(legemiddel, pasient, reit);
-                        } catch (UlovligUtskrift u) {
-                            System.out.println(u.getMessage());
-                        }
-                    } else if (data[3].equals("militaer")) {
-                        try {
-                            resepten = ritkigLege.skrivMilitaerResept(legemiddel, pasient, reit);
-                        } catch (UlovligUtskrift u) {
-                            System.out.println(u.getMessage());
-                        }
-                    } else if (data[3].equals("p")) {
-                        try {
-                            resepten = ritkigLege.skrivPResept(legemiddel, pasient);
-                        } catch (UlovligUtskrift u) {
-                            System.out.println(u.getMessage());
-                        }
-                    } else if (data[3].equals("blaa")) {
-                        try {
-                            resepten = ritkigLege.skrivBlaaResept(legemiddel, pasient, reit);
-                        } catch (UlovligUtskrift u) {
-                            System.out.println(u.getMessage());
-                        }
-                    }
-                    resepter.leggTil(resepten);
-                    pasient.leggTilResept(resepten);
+                } else if(objekttype == 4 && data.length == 5){ //Resepter
+                    System.out.println(data[0]+", "+data[1]+", "+data[2]+", "+data[3]+", "+data[4]);
+                    leggTilReseptliste(data[0], data[1], data[2], data[3], data[4]);
                 }
             }
         }
@@ -190,7 +88,6 @@ class Legesystem{
             inputFraBruker = Integer.parseInt(scan.nextLine());
         }
     }
-
 
 
     protected void seFullstendigListe(){
@@ -397,7 +294,6 @@ class Legesystem{
     }
 
 
-
     protected void brukEnResept(){
         System.out.println("Hvilken pasient vil du se resepter for?");
         for (int i = 0; i < pasienter.stoerrelse(); i++) {
@@ -446,8 +342,6 @@ class Legesystem{
             }
         }
     }
-
-
 
 
     protected void skrivUtStatestikk() {
@@ -530,5 +424,72 @@ class Legesystem{
             System.out.println("0: Gå tilbake.");
             inputFraBruker = Integer.parseInt(scan.nextLine());
         }
+    }
+
+    protected void leggTilPasientliste(String navn, String fnr){
+        Pasient pasient = new Pasient(navn, fnr);
+        pasienter.leggTil(pasient);
+    }
+    protected void leggTilLegeliste(String navn, String kontrollId){
+        Lege lege = new Lege(navn, Integer.parseInt(kontrollId));
+        leger.leggTil(lege);
+    }
+    protected void leggTilLegemiddelliste(String navn, String type, String pris, String virkestoff, String styrke){
+        Legemiddel legemiddel = null;
+
+        if(type.equals("narkotisk")){ //Narkotisk
+            legemiddel = new Narkotisk(navn, Float.parseFloat(pris), Float.parseFloat(virkestoff), Integer.parseInt(styrke));
+
+        } else if(type.equals("vanedannende")) { //Vanedannende
+            legemiddel= new Vanedannende(navn, Float.parseFloat(pris), Float.parseFloat(virkestoff), Integer.parseInt(styrke));
+
+        } else if(type.equals("vanlig")){ //Vanlig
+            legemiddel = new VanligLegemiddel(navn, Float.parseFloat(pris), Float.parseFloat(virkestoff));
+        } else{
+            return;
+        }
+        legemidler.leggTil(legemiddel);
+    }
+    protected void leggTilReseptliste(String legemiddelNummer, String legeNavn, String pasientId, String typeresept, String reit){
+        if(Integer.parseInt(legemiddelNummer) > (legemidler.stoerrelse()-1) || Integer.parseInt(pasientId) > (pasienter.stoerrelse()-1)){
+            return;
+        }
+        Legemiddel legemiddel = legemidler.hent(Integer.parseInt(legemiddelNummer));
+        Lege ritkigLege = null;
+
+        for(Lege enLege : leger){
+            if(legeNavn.equals(enLege.hentNavn())){
+                ritkigLege = enLege;
+            }
+        }
+        Pasient pasient = pasienter.hent(Integer.parseInt(pasientId));
+        Resept resepten = null;
+        if (typeresept.equals("hvit")){
+            try {
+                resepten = ritkigLege.skrivHvitResept(legemiddel, pasient, Integer.parseInt(reit));
+            } catch (UlovligUtskrift u) {
+                System.out.println(u.getMessage());
+            }
+        } else if (typeresept.equals("militaer")) {
+            try {
+                resepten = ritkigLege.skrivMilitaerResept(legemiddel, pasient, Integer.parseInt(reit));
+            } catch (UlovligUtskrift u) {
+                System.out.println(u.getMessage());
+            }
+        } else if (typeresept.equals("p")) {
+            try {
+                resepten = ritkigLege.skrivPResept(legemiddel, pasient);
+            } catch (UlovligUtskrift u) {
+                System.out.println(u.getMessage());
+            }
+        } else if (typeresept.equals("blaa")) {
+            try {
+                resepten = ritkigLege.skrivBlaaResept(legemiddel, pasient, Integer.parseInt(reit));
+            } catch (UlovligUtskrift u) {
+                System.out.println(u.getMessage());
+            }
+        }
+        resepter.leggTil(resepten);
+        pasient.leggTilResept(resepten);
     }
 }

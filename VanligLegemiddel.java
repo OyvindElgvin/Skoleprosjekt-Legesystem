@@ -8,12 +8,12 @@ class VanligLegemiddel extends Legemiddel {
 
 	}
 
-	
+
 
 	// Override av toString for å skrive ut relevant info som String
 	@Override
 	public String toString() {
-		return "LegemiddelID: "+hentId()+"\nNavn: "+hentNavn()+"\nOriginalpris: "+hentPris()+" kr"+
+		return "LegemiddelID: "+hentId()+"\nNavn: "+hentNavn()+"\nType legemiddel: Vanlig \nOriginalpris: "+hentPris()+" kr"+
 				"\nVirkestoff: "+hentVirkestoff()+" mg";
 	}
 }
