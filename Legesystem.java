@@ -171,7 +171,7 @@ class Legesystem{
                 System.out.println("Hva er fødselsnummeret til pasienten?");
                 String foedselsnummer = scan.nextLine();
 
-                pasienter.leggTil(new Pasient(pasientNavn, foedselsnummer));
+                leggTilPasientliste(pasientNavn, foedselsnummer);
                 System.out.println("Pasienten er lagt til i systemet.");
             } else if(inputFraBruker == 2){ //Legger til lege
                 System.out.println();
@@ -179,9 +179,9 @@ class Legesystem{
                 String legeNavn = scan.nextLine();
 
                 System.out.println("Hva er kontrollID til legen? (0 hvis ingen)");
-                int kontrollId = Integer.parseInt(scan.nextLine());
+                int kontrollId = scan.nextLine();
 
-                leger.leggTil(new Lege(legeNavn, kontrollId));
+                leggTilLegeliste(legeNavn, kontrollId);
                 System.out.println("Legen er lagt til i systemet.");
             } else if(inputFraBruker == 3){ //Legger til legemiddel
                 System.out.println();
@@ -189,30 +189,24 @@ class Legesystem{
                 System.out.println("1: Narkotisk.");
                 System.out.println("2: Vanedannende.");
                 System.out.println("3: Vanlig.");
-                int type = Integer.parseInt(scan.nextLine());
+                String type = scan.nextLine();
+
+                String styrke = "vanlig";
+                if(type == "1" || type == "2"){
+                    System.out.println("Hva er styrken på legemiddelet?")
+                    styrke = scan.nextLine();
+                }
 
                 System.out.println("Hva heter legemiddelet?");
                 String legemiddelNavn = scan.nextLine();
 
                 System.out.println("Hva er prisen på legemiddelet?");
-                double pris = Double.parseDouble(scan.nextLine());
+                String pris = scan.nextLine();
 
                 System.out.println("Hvor mye virkemiddel?");
-                double virkemiddel = Double.parseDouble(scan.nextLine());
+                String virkemiddel = scan.nextLine();
 
-                Legemiddel legemiddel = null;
-                if(type == 1 || type == 2){
-                    System.out.println("Hva er styrken på legemiddelet?");
-                    int styrke = Integer.parseInt(scan.nextLine());
-                    if(type == 1){
-                        legemiddel = new Narkotisk(legemiddelNavn, pris, virkemiddel, styrke);
-                    } else{
-                        legemiddel = new Vanedannende(legemiddelNavn, pris, virkemiddel, styrke);
-                    }
-                }
-
-                legemiddel = new VanligLegemiddel(legemiddelNavn, pris, virkemiddel); // burde ikke denne være en else if i løkka if(type == 1 || type == 2){
-                legemidler.leggTil(legemiddel);
+                leggTilLegemiddelliste(legemiddelNavn, type, pris, virkestoff, styrke);
                 System.out.println("Legemiddelet er lagt til i systemet.");
             } else if(inputFraBruker == 4){
                 System.out.println();
@@ -437,13 +431,13 @@ class Legesystem{
     protected void leggTilLegemiddelliste(String navn, String type, String pris, String virkestoff, String styrke){
         Legemiddel legemiddel = null;
 
-        if(type.equals("narkotisk")){ //Narkotisk
+        if(type.equals("narkotisk") || type.equals("1")){ //Narkotisk
             legemiddel = new Narkotisk(navn, Double.parseDouble(pris), Double.parseDouble(virkestoff), Integer.parseInt(styrke));
 
-        } else if(type.equals("vanedannende")) { //Vanedannende
+        } else if(type.equals("vanedannende") || type.equals("2")) { //Vanedannende
             legemiddel= new Vanedannende(navn, Double.parseDouble(pris), Double.parseDouble(virkestoff), Integer.parseInt(styrke));
 
-        } else if(type.equals("vanlig")){ //Vanlig
+        } else if(type.equals("vanlig") || type.equals("3")){ //Vanlig
             legemiddel = new VanligLegemiddel(navn, Double.parseDouble(pris), Double.parseDouble(virkestoff));
         } else{
             return;
