@@ -56,7 +56,7 @@ class Legesystem{
                 }
             }
         }
-    }                       // ferdig lesFil()
+    }  // ferdig lesFil()
 
 
 
@@ -195,10 +195,10 @@ class Legesystem{
                 String legemiddelNavn = scan.nextLine();
 
                 System.out.println("Hva er prisen på legemiddelet?");
-                float pris = Float.parseFloat(scan.nextLine());
+                double pris = Double.parseDouble(scan.nextLine());
 
                 System.out.println("Hvor mye virkemiddel?");
-                float virkemiddel = Float.parseFloat(scan.nextLine());
+                double virkemiddel = Double.parseDouble(scan.nextLine());
 
                 Legemiddel legemiddel = null;
                 if(type == 1 || type == 2){
@@ -438,13 +438,13 @@ class Legesystem{
         Legemiddel legemiddel = null;
 
         if(type.equals("narkotisk")){ //Narkotisk
-            legemiddel = new Narkotisk(navn, Float.parseFloat(pris), Float.parseFloat(virkestoff), Integer.parseInt(styrke));
+            legemiddel = new Narkotisk(navn, Double.parseDouble(pris), Double.parseDouble(virkestoff), Integer.parseInt(styrke));
 
         } else if(type.equals("vanedannende")) { //Vanedannende
-            legemiddel= new Vanedannende(navn, Float.parseFloat(pris), Float.parseFloat(virkestoff), Integer.parseInt(styrke));
+            legemiddel= new Vanedannende(navn, Double.parseDouble(pris), Double.parseDouble(virkestoff), Integer.parseInt(styrke));
 
         } else if(type.equals("vanlig")){ //Vanlig
-            legemiddel = new VanligLegemiddel(navn, Float.parseFloat(pris), Float.parseFloat(virkestoff));
+            legemiddel = new VanligLegemiddel(navn, Double.parseDouble(pris), Double.parseDouble(virkestoff));
         } else{
             return;
         }
