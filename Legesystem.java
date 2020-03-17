@@ -23,9 +23,8 @@ class Legesystem{
             System.out.println("Fant ikke fil");
             return;
         }
-
-        int objekttype = 0; //Sier hvilke type objekt som leses
-        int index = 262; // bare la inn denne så ser vi enkelt hvilet linje det er snakk om
+        int objekttype = 0; // Sier hvilke type objekt som leses
+        int index = 262;    // til å debugge reseptene
 
         while(scanner.hasNextLine()){
             String linje = scanner.nextLine();
@@ -56,7 +55,7 @@ class Legesystem{
                 }
             }
         }
-    }  // ferdig lesFil()
+    }
 
 
 
@@ -88,24 +87,11 @@ class Legesystem{
             inputFraBruker = Integer.parseInt(scan.nextLine());
         }
     }
-    protected void seLegeliste(){
-      for (int i = 0; i < leger.stoerrelse(); i++) {
-        System.out.print(i+" "+leger.hent(i).navn);
-        System.out.print(", "+leger.hent(i).ikkeSpesialist+"\n");}
-    }
-    protected void sePasientListe(){
-      for (int i = 0; i < pasienter.stoerrelse(); i++) {
-          System.out.println(i +": "+ pasienter.hent(i).toString());}
-    }
-    protected void seLegemiddelListe(){
-      for (int i = 0; i < legemidler.stoerrelse(); i++) {
-        System.out.println(i + ": " + legemidler.hent(i).navn);}
-    }
-    protected void seReseptListe(){
-      for (int i = 0; i < resepter.stoerrelse(); i++) {
-        System.out.println(i +": "+ resepter.hent(i).legemiddelet.navn +" "+ resepter.hent(i).reit);}
-    }
 
+
+
+
+    // Hovedmetode i ordreløkka
     protected void seFullstendigListe(){
       int inputFraBruker = -1;
 
@@ -149,9 +135,7 @@ class Legesystem{
         }
         else if(inputFraBruker == 6){
           ordrelokke();
-
         }
-
 
         System.out.println("Velg et av alternativene");
         System.out.println("1: Full oversikt.");
@@ -166,10 +150,7 @@ class Legesystem{
     }
 
 
-    protected static void skrivDataTilFil(){}
-    protected static void skrivUtEnResept(){}
-
-
+    // Hovedmetode i ordreløkka
     protected void leggTilElement(){
         int inputFraBruker = -1;
 
@@ -185,7 +166,7 @@ class Legesystem{
                 if(leggTilPasientliste(pasientNavn, foedselsnummer)){
                     System.out.println("Pasienten er lagt til i systemet.");
                 } else{
-                    System.out.println("Kunne ikke lege pasienten til i systemet.");
+                    System.out.println("Kunne ikke legge pasienten til i systemet.");
                 }
             } else if(inputFraBruker == 2){ //Legger til lege
                 System.out.println();
@@ -276,6 +257,7 @@ class Legesystem{
     }
 
 
+    // Hovedmetode i ordreløkka
     protected void brukEnResept(){
         System.out.println("Hvilken pasient vil du se resepter for?");
         for (int i = 0; i < pasienter.stoerrelse(); i++) {
@@ -289,7 +271,7 @@ class Legesystem{
         }
         Pasient pasient = pasienter.hent(inputFraBruker);
         System.out.println("Valgt pasient: " + pasient);
-
+        
         System.out.println("Hvilken resept vil du bruke?");
         Stabel<Resept> reseptstabel = pasient.hentResepter();   // Oppretter en stabel med reseptene til pasienten
         if (reseptstabel.stoerrelse() == 0) {                   // hvis det er 0 resepter
@@ -325,6 +307,8 @@ class Legesystem{
         }
     }
 
+
+    // Hovedmetode i ordreløkka
     protected void skrivUtStatestikk() {
         int inputFraBruker = -1;
 
@@ -407,16 +391,41 @@ class Legesystem{
         }
     }
 
+
+
+    protected void seLegeliste(){
+      for (int i = 0; i < leger.stoerrelse(); i++) {
+        System.out.print(i+" "+leger.hent(i).navn);
+        System.out.print(", "+leger.hent(i).ikkeSpesialist+"\n");}
+    }
+
+    protected void sePasientListe(){
+      for (int i = 0; i < pasienter.stoerrelse(); i++) {
+          System.out.println(i +": "+ pasienter.hent(i).toString());}
+    }
+
+    protected void seLegemiddelListe(){
+      for (int i = 0; i < legemidler.stoerrelse(); i++) {
+        System.out.println(i + ": " + legemidler.hent(i).navn);}
+    }
+
+    protected void seReseptListe(){
+      for (int i = 0; i < resepter.stoerrelse(); i++) {
+        System.out.println(i +": "+ resepter.hent(i).legemiddelet.navn +" "+ resepter.hent(i).reit);}
+    }
+
     protected boolean leggTilPasientliste(String navn, String fnr){
         Pasient pasient = new Pasient(navn, fnr);
         pasienter.leggTil(pasient);
         return true;
     }
+
     protected boolean leggTilLegeliste(String navn, String kontrollId){
         Lege lege = new Lege(navn, Integer.parseInt(kontrollId));
         leger.leggTil(lege);
         return true;
     }
+
     protected boolean leggTilLegemiddelliste(String navn, String type, String pris, String virkestoff, String styrke){
         Legemiddel legemiddel = null;
 
@@ -434,6 +443,7 @@ class Legesystem{
         legemidler.leggTil(legemiddel);
         return true;
     }
+
     protected boolean leggTilReseptliste(String legemiddelNummer, String legeNavn, String pasientId, String typeresept, String reit){
         if(Integer.parseInt(legemiddelNummer) > (legemidler.stoerrelse()-1) || Integer.parseInt(pasientId) > (pasienter.stoerrelse()-1)){
             return false;
