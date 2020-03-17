@@ -70,7 +70,7 @@ class Legesystem{
             } else if(inputFraBruker == 4){
                 skrivUtStatestikk();
             } else if(inputFraBruker == 5){
-                //skrivDataTilFil();
+                skrivFil(pasienter, legemidler, leger, resepter, "utdata.txt");
             } else if (6 < inputFraBruker || inputFraBruker < -1) {
                 System.out.println("Velg en av de fem alternativene");
             }
