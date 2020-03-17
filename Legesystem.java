@@ -431,6 +431,26 @@ class Legesystem{
                 String kontrollId = Integer.toString(lege.hentKontrollId());
                 skriver.append(legeNavn + ", " + kontrollId + "\n");
             }
+
+            skriver.append("# Resepter (legemiddelNummer, legeNavn, pasientID, typeresept, reit)\n");
+            for(int i = 0; i < reseptListe.stoerrelse(); i++){
+                Resept resept = reseptListe.hent(i);
+                String legemiddelNummer = resept.hentLegemiddelNr();
+                String legeNavn = resept.hentLege();
+                String pasientId = Integer.toString(resept.hentPasientId());
+                String type = "";
+                if(resept instanceof MilitaerResept){
+                    type = "militaer";
+                } else if(resept instanceof PResept){
+                    type = "p";
+                } else if(resept instanceof HvitResept){
+                    type = "hvit";
+                } else if (resept instanceof BlaaResept){
+                    type = "blaa";
+                } 
+                String reit = Integer.toString(resept.hentReit());
+                skriver.append(legemiddelNummer + ", " + legeNavn + ", " + pasientId + ", " + type + ", " + reit +"\n");
+            }
         skriver.close();
         } catch(FileNotFoundException e){
             System.out.println(e.getMessage());

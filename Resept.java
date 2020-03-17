@@ -33,6 +33,11 @@ abstract class Resept {
 		return legemiddelet.toString();
 	}
 
+	// Henter id til legemiddel
+	public String hentLegemiddelNr(){
+		return Integer.toString(legemiddelet.hentId());
+	}
+
 	// Henter navnet til Lege eller Spesialist
 	public String hentLege() {
 		return utskrivendeLege.hentNavn();
