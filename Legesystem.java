@@ -395,7 +395,7 @@ class Legesystem{
         File fil = new File(utfil);
         try{
             PrintWriter skriver = new PrintWriter(fil);
-            
+
             skriver.append("# Pasienter (navn, fnr)\n");
             for(int i = 0; i < pasientListe.stoerrelse(); i++){
                 Pasient pasient = pasientListe.hent(i);
