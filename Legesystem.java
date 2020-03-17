@@ -129,8 +129,11 @@ class Legesystem{
             System.out.println(i+1 + ": " + resepter.hent(i).toString() + "\n");
           }
         }
-        else if(inputFraBruker == 6){
+        else if(inputFraBruker == 0){
           ordrelokke();
+        }
+        else if(inputFraBruker < -1 || inputFraBruker > 6){
+          System.out.println("Velg et av de seks alternativene.");
         }
 
         System.out.println("Velg et av alternativene");
@@ -139,7 +142,7 @@ class Legesystem{
         System.out.println("3: Info om pasienter.");
         System.out.println("4: Info om legemidler.");
         System.out.println("5: Info om resepter.");
-        System.out.println("6: Tilbake.");
+        System.out.println("0: Tilbake.");
 
         inputFraBruker = Integer.parseInt(scan.nextLine());
       }
@@ -267,7 +270,7 @@ class Legesystem{
         }
         Pasient pasient = pasienter.hent(inputFraBruker);
         System.out.println("Valgt pasient: " + pasient);
-        
+
         System.out.println("Hvilken resept vil du bruke?");
         Stabel<Resept> reseptstabel = pasient.hentResepter();   // Oppretter en stabel med reseptene til pasienten
         if (reseptstabel.stoerrelse() == 0) {                   // hvis det er 0 resepter
