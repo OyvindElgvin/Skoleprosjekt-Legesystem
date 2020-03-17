@@ -1,8 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
-
+import java.io.PrintWriter;
 
 class Legesystem{
     //Liste som holder på ulike objekter
@@ -58,7 +57,6 @@ class Legesystem{
     }
 
 
-
     public void ordrelokke(){
         int inputFraBruker = -1;
 
@@ -87,8 +85,6 @@ class Legesystem{
             inputFraBruker = Integer.parseInt(scan.nextLine());
         }
     }
-
-
 
 
     // Hovedmetode i ordreløkka
@@ -237,7 +233,7 @@ class Legesystem{
                 if(leggTilReseptliste(legemiddelIndeks, legeNavn, pasientIndeks, type, reit)){
                     System.out.println("Resepten er lagt til.");
                 } else {
-                     System.out.println("Kunne ikke legge til resepten.");
+                    System.out.println("Kunne ikke legge til resepten.");
                 }
             } else if(inputFraBruker == 0){
                 ordrelokke(); //Går tilbake
@@ -391,7 +387,52 @@ class Legesystem{
         }
     }
 
+    // Hovedmetode for å skrive ut data til fil
+    protected void skrivFil(Liste<Pasient> pasientListe,Liste<Legemiddel> legemiddelListe, Liste<Lege> legeListe, Liste<Resept> reseptListe, String utfil){
+        File fil = new File(utfil);
+        try{
+            PrintWriter skriver = new PrintWriter(fil);
+            
+            skriver.append("# Pasienter (navn, fnr)\n");
+            for(int i = 0; i < pasientListe.stoerrelse(); i++){
+                Pasient pasient = pasientListe.hent(i);
+                String pasientNavn = pasient.hentNavn();
+                String foedselsnummer = pasient.hentFødselsnr();
+                skriver.append(pasientNavn + ", " + foedselsnummer + "\n");
+            }
 
+            skriver.append("# Legemidler (navn, type, pris, virkestoff [, styrke])\n");
+            for(int i = 0; i < legemiddelListe.stoerrelse(); i++){
+                Legemiddel legemiddel = legemiddelListe.hent(i);
+                String legemiddelNavn = legemiddel.hentNavn();
+                String type;
+                String styrke;
+                if(legemiddel instanceof Narkotisk){
+                    type = "narkotisk";
+                    styrke = legemiddel.hentNarkotiskStyrke();
+                } else if (legemiddel instanceof Vanedannende){
+                    type = "vanedannende";
+                    styrke = legemiddel.hentVanedannendeStyrke();
+                } else if ( legemiddel instanceof VanligLegemiddel){
+                    type = "vanlig";
+                }
+                String pris = Double.toString(legemiddel.hentPris());
+                String virkestoff = Double.toString(legemiddel.hentVirkestoff());
+                skriver.append(legemiddelNavn + ", " + type +", "+ pris +", "+ virkestoff +", "+ styrke +"\n");
+            }
+
+            skriver.append("# Leger (navn, kontrollid / 0 hvis vanlig lege)\n");
+            for(int i = 0; i < legeListe.stoerrelse(); i++){
+                Lege lege = legeListe.hent(i);
+                String legeNavn = lege.hentNavn();
+                String kontrollId = Integer.toString(lege.hentKontrollId());
+                skriver.append(legeNavn + ", " + kontrollId + "\n");
+            }
+        skriver.close();
+        } catch(FileNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+    }
 
     protected void seLegeliste(){
       for (int i = 0; i < leger.stoerrelse(); i++) {

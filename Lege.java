@@ -17,6 +17,10 @@ class Lege implements Comparable<Lege> {
 		return navn;
 	}
 
+	public int hentKontrollId(){
+		return ikkeSpesialist;
+	}
+
 	// Override av toString for å skrive ut relevant info som String
 	@Override
 	public String toString() {
