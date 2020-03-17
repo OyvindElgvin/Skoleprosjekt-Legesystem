@@ -10,7 +10,7 @@ class Vanedannende extends Legemiddel {
 	}
 
 	// Henter ut styrken
-	public int hentVanedannendeStyrke() {
+	public int hentStyrke() {
 		return styrke;
 	}
 
@@ -20,6 +20,6 @@ class Vanedannende extends Legemiddel {
 	@Override
 	public String toString() {
 		return "LegemiddelID: "+hentId()+"\nNavn: "+hentNavn()+"\nType legemiddel: Vanedannende \nOriginalpris: "+hentPris()+" kr"+
-				"\nVirkestoff: "+hentVirkestoff()+" mg\nStyrke: "+hentVanedannendeStyrke();
+				"\nVirkestoff: "+hentVirkestoff()+" mg\nStyrke: "+hentStyrke();
 	}
 }

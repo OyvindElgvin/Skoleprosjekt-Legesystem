@@ -408,14 +408,14 @@ class Legesystem{
             for(int i = 0; i < legemiddelListe.stoerrelse(); i++){
                 Legemiddel legemiddel = legemiddelListe.hent(i);
                 String legemiddelNavn = legemiddel.hentNavn();
-                String type;
-                String styrke;
+                String type = "";
+                String styrke = "";
                 if(legemiddel instanceof Narkotisk){
                     type = "narkotisk";
-                    styrke = Integer.toString(legemiddel.hentNarkotiskStyrke());
+                    styrke = Integer.toString(legemiddel.hentStyrke());
                 } else if (legemiddel instanceof Vanedannende){
                     type = "vanedannende";
-                    styrke = Integer.toString(legemiddel.hentVanedannendeStyrke());
+                    styrke = Integer.toString(legemiddel.hentStyrke());
                 } else if ( legemiddel instanceof VanligLegemiddel){
                     type = "vanlig";
                 }

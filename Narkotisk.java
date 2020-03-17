@@ -11,7 +11,7 @@ class Narkotisk extends Legemiddel {
 	}
 
 	// Henter ut styrken
-	public int hentNarkotiskStyrke() {
+	public int hentStyrke() {
 		return styrke;
 	}
 
@@ -21,6 +21,6 @@ class Narkotisk extends Legemiddel {
 	@Override
 	public String toString() {
 		return "LegemiddelID: "+hentId()+"\nNavn: "+hentNavn()+"\nType legemiddel: Narkotisk \nOriginalpris: "+hentPris()+" kr"+
-				"\nVirkestoff: "+hentVirkestoff()+" mg\nStyrke: "+hentNarkotiskStyrke();
+				"\nVirkestoff: "+hentVirkestoff()+" mg\nStyrke: "+hentStyrke();
 	}
 }

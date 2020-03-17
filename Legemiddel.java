@@ -42,4 +42,6 @@ abstract class Legemiddel {
 	public void settNyPris(double pr) {
 		pris = pr;
 	}
+
+	abstract int hentStyrke();
 }
