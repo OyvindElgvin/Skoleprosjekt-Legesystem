@@ -409,10 +409,10 @@ class Legesystem{
                 String styrke;
                 if(legemiddel instanceof Narkotisk){
                     type = "narkotisk";
-                    styrke = legemiddel.hentNarkotiskStyrke();
+                    styrke = Integer.toString(legemiddel.hentNarkotiskStyrke());
                 } else if (legemiddel instanceof Vanedannende){
                     type = "vanedannende";
-                    styrke = legemiddel.hentVanedannendeStyrke();
+                    styrke = Integer.toString(legemiddel.hentVanedannendeStyrke());
                 } else if ( legemiddel instanceof VanligLegemiddel){
                     type = "vanlig";
                 }
