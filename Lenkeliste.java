@@ -26,7 +26,7 @@ class Lenkeliste<T> implements Liste<T> {
 	}
 
 	// indre klasse LenkelisteIterator med hasNext() og next()
-	class LenkelisteIterator implements Iterator<T>{
+	class LenkelisteIterator<T> implements Iterator<T>{
 		private Lenkeliste<T> enListe;
 		private int pos;
 
