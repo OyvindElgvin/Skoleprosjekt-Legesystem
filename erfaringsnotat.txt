@@ -8,3 +8,7 @@ F2:
 
 
 F3:
+
+Gjennom gruppearbeidet har vi blitt kjent med samarbeidsverktøy som GitHub og
+scrum-metoden. Vi har også fått en kjennskap med hvordan å kommunisere for eksempel rundt
+fordelingen av oppgavene. 
