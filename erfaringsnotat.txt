@@ -1,14 +1,14 @@
 F1:
-
+Alle oppgavene løste seg ganske lett og samarbeidet gikk bra. Vi jobbet stort sett
+sammen irl og løste mange oppgaver muntlig mens vi programmerte de.
 
 
 F2:
-
+Kanskje prøve Atom TeleType slik at vi kunne programmere live sammen over nett.
 
 
 
 F3:
-
 Gjennom gruppearbeidet har vi blitt kjent med samarbeidsverktøy som GitHub og
-scrum-metoden. Vi har også fått en kjennskap med hvordan å kommunisere for eksempel rundt
-fordelingen av oppgavene. 
+scrum-metoden. Vi har også fått kjennskap med hvordan å kommunisere rundt
+fordelingen av oppgavene.
