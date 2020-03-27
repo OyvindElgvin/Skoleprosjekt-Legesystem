@@ -22,7 +22,7 @@ class Lenkeliste<T> implements Liste<T> {
 
 	// Iterator
 	public Iterator<T> iterator(){
-		return new LenkelisteIterator(this);
+		return new LenkelisteIterator<T>(this);
 	}
 
 	// indre klasse LenkelisteIterator med hasNext() og next()

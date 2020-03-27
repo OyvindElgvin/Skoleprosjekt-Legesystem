@@ -258,10 +258,11 @@ class Legesystem{
 
     // Hovedmetode i ordreløkka
     protected void brukEnResept(){
-        System.out.println("Hvilken pasient vil du se resepter for?");
         for (int i = 0; i < pasienter.stoerrelse(); i++) {
             System.out.println(i +": "+ pasienter.hent(i).toString()); // Lister opp pasientene
 		}
+        System.out.println();
+        System.out.println("Hvilken pasient vil du se resepter for?");
         int inputFraBruker = Integer.parseInt(scan.nextLine());
         if ((pasienter.stoerrelse()-1) < inputFraBruker || inputFraBruker < -1) { // hvis utenfor lista
             System.out.println("Feil inntasting! Tallet var utenfor lista.");
@@ -447,7 +448,7 @@ class Legesystem{
                     type = "hvit";
                 } else if (resept instanceof BlaaResept){
                     type = "blaa";
-                } 
+                }
                 String reit = Integer.toString(resept.hentReit());
                 skriver.append(legemiddelNummer + ", " + legeNavn + ", " + pasientId + ", " + type + ", " + reit +"\n");
             }

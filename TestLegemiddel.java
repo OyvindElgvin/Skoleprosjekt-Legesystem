@@ -31,7 +31,7 @@ class TestLegemiddel {
 		System.out.println("Navn: " + narko.hentNavn());
 		System.out.println("Pris: " + narko.hentPris() + " kr");
 		System.out.println("Virkestoff: " + narko.hentVirkestoff()+ " mg");
-		System.out.println("Styrke: " + narko.hentNarkotiskStyrke());
+		System.out.println("Styrke: " + narko.hentStyrke());
 		narko.settNyPris(1200);
 		System.out.println("Pris: " + narko.hentPris() + " kr");
 		System.out.println("\nTest av toString-metoden:");
@@ -56,7 +56,7 @@ class TestLegemiddel {
 		System.out.println("Navn: " + vane.hentNavn());
 		System.out.println("Pris: " + vane.hentPris() + " kr");
 		System.out.println("Virkestoff: " + vane.hentVirkestoff()+ " mg");
-		System.out.println("Styrke: " + vane.hentVanedannendeStyrke());
+		System.out.println("Styrke: " + vane.hentStyrke());
 		vane.settNyPris(500);
 		System.out.println("Pris: " + vane.hentPris() + " kr");
 		System.out.println("\nTest av toString-metoden:");

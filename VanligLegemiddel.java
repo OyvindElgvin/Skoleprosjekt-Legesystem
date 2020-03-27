@@ -8,6 +8,9 @@ class VanligLegemiddel extends Legemiddel {
 
 	}
 
+	public int hentStyrke(){
+		return 0;
+	}
 
 
 	// Override av toString for å skrive ut relevant info som String
